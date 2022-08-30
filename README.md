@@ -4,7 +4,6 @@
 [![Lint][gh-ci-lint-badge]][gh-ci-lint]
 [![GitHub release][gh-release-badge]][gh-release]
 
-
 ## License
 
 [MIT](./LICENSE) License © 2022 [Dup4][dup4]
