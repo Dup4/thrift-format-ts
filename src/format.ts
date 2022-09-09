@@ -1,6 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IOptions } from "./types";
 
+class StructLine {
+  number = "";
+  paramOptions = "";
+  paramName = "";
+  defaultValue = "";
+  description = "";
+  annotation = "";
+}
+
+class EnumLine {
+  number = "";
+  paramName = "";
+  hasDescription = "";
+  description = "";
+  annotation = "";
+}
+
 export function formatThrift(
   content: string,
   options?: IOptions,
