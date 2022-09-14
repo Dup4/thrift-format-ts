@@ -34,7 +34,7 @@ class ThriftFormatter {
     return content;
   }
 
-  deleteExtraEmptyLines(content: string) {
+  private deleteExtraEmptyLines(content: string): string {
     const c = content.split("\n");
     const res: string[] = [];
 
