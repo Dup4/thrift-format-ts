@@ -35,7 +35,7 @@ class ThriftFormatter {
   }
 
   private deleteExtraEmptyLines(content: string): string {
-    const c = content.split("\n");
+    const c = this.splitByLine(content);
     const res: string[] = [];
 
     for (const l of c) {
@@ -47,6 +47,10 @@ class ThriftFormatter {
     }
 
     return res.join("\n");
+  }
+
+  private splitByLine(str: string): string[] {
+    return str.split(/\r?\n/);
   }
 }
 
