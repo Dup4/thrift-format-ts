@@ -5,7 +5,7 @@ import * as fs from "fs";
 import path from "path";
 
 function getFullPath(file_name: string): string {
-  return path.resolve(__dirname, `./test_data/${file_name}`).toString();
+  return path.resolve(__dirname, "test_data", file_name).toString();
 }
 
 describe("should", () => {
