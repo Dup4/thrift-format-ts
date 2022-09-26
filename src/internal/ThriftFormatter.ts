@@ -6,6 +6,7 @@ import { IOptions } from "../types";
 
 class Options implements IOptions {
   indent = 4;
+  enableLabFormat = false;
 }
 
 class StructLine {
@@ -29,11 +30,14 @@ class ThriftFormatter {
   options: IOptions;
 
   constructor(options?: IOptions) {
-    this.options = options ?? new Options();
+    this.options = { ...new Options(), ...options };
   }
 
   public format(content: string): string {
-    content = this.labFormat(content);
+    if (this.options.enableLabFormat === true) {
+      content = this.labFormat(content);
+    }
+
     content = this.deleteExtraEmptyLines(content);
     return content;
   }

@@ -11,6 +11,17 @@ function getFullPath(file_name: string): string {
 describe("should", () => {
   it("exported", () => {
     const thriftContent = fs.readFileSync(getFullPath("a.thrift")).toString();
-    expect(formatThrift(thriftContent)).matchSnapshot();
+    expect(
+      formatThrift(thriftContent, { enableLabFormat: true }),
+    ).matchSnapshot();
+  });
+
+  it("exported", () => {
+    const thriftContent = fs
+      .readFileSync(getFullPath("ThriftTest.thrift"))
+      .toString();
+    expect(
+      formatThrift(thriftContent, { enableLabFormat: true }),
+    ).matchSnapshot();
   });
 });
