@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { ThriftData } from "thrift-parser-ts";
+import { PureThriftFormatter } from "thrift-fmt-ts";
+
 import { IOptions } from "../types";
 
 class Options implements IOptions {
@@ -30,8 +33,16 @@ class ThriftFormatter {
   }
 
   public format(content: string): string {
+    content = this.labFormat(content);
     content = this.deleteExtraEmptyLines(content);
     return content;
+  }
+
+  private labFormat(content: string): string {
+    const data = ThriftData.from_string(content);
+    const fmt = new PureThriftFormatter();
+    const afterFormatContent = fmt.format_node(data.document);
+    return afterFormatContent;
   }
 
   private deleteExtraEmptyLines(content: string): string {

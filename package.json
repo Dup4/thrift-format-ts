@@ -69,6 +69,7 @@
     "vitest": "^0.7.13"
   },
   "dependencies": {
-    "thrift-fmt-ts": "1.1.2-a1"
+    "thrift-fmt-ts": "1.1.2-a1",
+    "thrift-parser-ts": "1.0.6-a1"
   }
 }

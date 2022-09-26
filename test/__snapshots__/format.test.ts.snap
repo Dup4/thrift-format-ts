@@ -6,7 +6,6 @@ exports[`should > exported 1`] = `
 }
 
 struct B {
-     1: required string b,
-}
-"
+    1: required string b,
+}"
 `;
