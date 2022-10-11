@@ -5,5 +5,5 @@ struct A {
 
 
 struct B {
-     1: required string b,
+    1: required string b,
 }

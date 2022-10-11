@@ -6,7 +6,7 @@ exports[`should > exported 1`] = `
 }
 
 struct B {
-     1: required string b,
+    1: required string b,
 }
 "
 `;
@@ -423,5 +423,6 @@ struct StructB {
 
 struct OptionalSetDefaultTest {
   1: optional set<string> with_default = [ \\"test\\" ]
-}"
+}
+"
 `;
