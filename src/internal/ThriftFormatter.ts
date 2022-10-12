@@ -5,7 +5,7 @@ import { Options } from "./options";
 import { PrettyThriftFormatter } from "./PrettyThriftFormatter";
 
 export class ThriftFormatter {
-  readonly NEW_LINE = "\r\n";
+  readonly NEW_LINE = "\n";
   readonly NEW_LINE_REGEX = /\r?\n/;
 
   options: Options;
