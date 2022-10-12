@@ -35,9 +35,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
   protected patch() {
     PureThriftFormatter.walk_node(this._document, this.patchFieldReq);
-
     PureThriftFormatter.walk_node(this._document, this.patchFieldListSeparator);
-
     PureThriftFormatter.walk_node(
       this._document,
       this.patchRemoveLastListSeparator,
