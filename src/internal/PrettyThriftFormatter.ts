@@ -34,10 +34,12 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
   patch() {
     PureThriftFormatter.walk_node(this._document, this._patch_field_req);
+
     PureThriftFormatter.walk_node(
       this._document,
       this._patch_field_list_separator,
     );
+
     PureThriftFormatter.walk_node(
       this._document,
       this._patch_remove_last_list_separator,
@@ -48,6 +50,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     if (!(n instanceof ThriftParserAll.FieldContext)) {
       return;
     }
+
     if (
       n.parent === undefined ||
       n.parent instanceof ThriftParserAll.Function_Context ||
@@ -55,6 +58,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     ) {
       return;
     }
+
     let i = 0;
     for (; i < n.childCount; i++) {
       const child = n.getChild(i);
@@ -91,6 +95,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     ) {
       return;
     }
+
     const child = n.getChild(n.childCount - 1);
     if (child instanceof ThriftParserAll.List_separatorContext) {
       const comma = <TerminalNode>child.getChild(0);
@@ -123,6 +128,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     if (!(is_inline_field || is_inline_node)) {
       return;
     }
+
     if (n.parent === undefined) {
       return;
     }
