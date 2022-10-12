@@ -2,18 +2,17 @@ import { describe, expect, it } from "vitest";
 import { formatThrift } from "@/format";
 
 import * as fs from "fs";
-import path from "path";
 
-function getFullPath(file_name: string): string {
-  return path.resolve(__dirname, "test_data", file_name).toString();
-}
+import { getReadFullPath, readFile, writeFile } from "./common";
 
 describe("ThriftFormatter", () => {
   it("format", () => {
-    for (const file of fs.readdirSync(getFullPath(""))) {
-      const content = fs.readFileSync(getFullPath(file)).toString();
+    for (const file of fs.readdirSync(getReadFullPath(""))) {
+      const content = readFile(file);
+      const formatContent = formatThrift(content);
+      writeFile(file, formatContent);
 
-      expect(formatThrift(content)).matchSnapshot();
+      expect(formatContent).matchSnapshot();
     }
   });
 });
