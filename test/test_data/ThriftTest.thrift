@@ -99,13 +99,11 @@ struct Xtruct3
   11: i64    i64_thing
 }
 
-
 struct Insanity
 {
   1: map<Numberz, UserId> userMap,
   2: list<Xtruct> xtructs
 } (python.immutable= "")
-
 
 struct CrazyNesting {
   1: string string_field,
@@ -365,16 +363,16 @@ struct GuessProtocolStruct {
 }
 
 struct LargeDeltas {
-  1: Bools b1,
-  10: Bools b10,
-  100: Bools b100,
-  500: bool check_true,
-  1000: Bools b1000,
-  1500: bool check_false,
-  2000: VersioningTestV2 vertwo2000,
-  2500: set<string> a_set2500,
-  3000: VersioningTestV2 vertwo3000,
-  4000: list<i32> big_numbers
+  1: Bools b1, // b1
+  10: Bools b10, //  b10
+  100: Bools b100, // b100
+  500: bool check_true, // check_false
+  1000: Bools b1000, // b1000
+  1500: bool check_false, // check_false
+  2000: VersioningTestV2 vertwo2000, // vertwo2000
+  2500: set<string> a_set2500, // a_set2500
+  3000: VersioningTestV2 vertwo3000, // vertwo3000
+  4000: list<i32> big_numbers // big_numbers
 }
 
 struct NestedListsI32x2 {
@@ -384,9 +382,9 @@ struct NestedListsI32x3 {
   1: list<list<list<i32>>> integerlist
 }
 struct NestedMixedx2 {
-  1: list<set<i32>> int_set_list
-  2: map<i32,set<string>> map_int_strset
-  3: list<map<i32,set<string>>> map_int_strset_list
+  1: list<set<i32>> int_set_list /* int_set_list */
+  2: map<i32,set<string>> map_int_strset /* map_int_strset */
+  3: list<map<i32,set<string>>> map_int_strset_list  /* map_int_strset_list */
 }
 struct ListBonks {
   1: list<Bonk> bonk
@@ -405,8 +403,8 @@ struct StructA {
 }
 
 struct StructB {
-  1: optional StructA aa;
-  2: required StructA ab;
+  1: optional StructA aa; /* aa */ 
+  2: required StructA ab; // ab 
 }
 
 struct OptionalSetDefaultTest {
