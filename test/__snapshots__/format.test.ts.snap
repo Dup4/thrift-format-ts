@@ -408,7 +408,8 @@ struct StructB {
 
 struct OptionalSetDefaultTest {
     1: optional set<string> with_default = [ \\"test\\" ],
-}"
+}
+"
 `;
 
 exports[`ThriftFormatter > format 2`] = `
@@ -424,5 +425,6 @@ struct A {
 
 struct B {
     1: required string b,
-}"
+}
+"
 `;

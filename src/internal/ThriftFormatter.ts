@@ -15,12 +15,15 @@ export class ThriftFormatter {
   }
 
   public format(content: string): string {
+    const data = ThriftData.fromString(content);
+    const fmt = new PrettyThriftFormatter(data, this.options);
+
+    content = fmt.format();
+
     content += this.NEW_LINE;
     content = this.deleteExtraEmptyLines(content);
 
-    const data = ThriftData.fromString(content);
-    const fmt = new PrettyThriftFormatter(data, this.options);
-    return fmt.format();
+    return content;
   }
 
   private deleteExtraEmptyLines(content: string): string {
