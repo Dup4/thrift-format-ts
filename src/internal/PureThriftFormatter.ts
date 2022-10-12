@@ -5,6 +5,7 @@ import {
   ThriftParserAll,
 } from "thrift-parser-typescript";
 
+import { Constant } from "./constant";
 import { Options } from "./options";
 
 type Nodes = ParseTree[];
@@ -48,7 +49,7 @@ export class PureThriftFormatter {
 
   _push(text: string) {
     if (this._newline_count > 0) {
-      this._out += "\n".repeat(this._newline_count);
+      this._out += Constant.NEW_LINE.repeat(this._newline_count);
       this._newline_count = 0;
     }
 

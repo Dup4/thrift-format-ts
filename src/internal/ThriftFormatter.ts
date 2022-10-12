@@ -1,13 +1,12 @@
 import { ThriftData } from "thrift-parser-typescript";
 
 import { IOptions } from "../types";
+import { Constant } from "./constant";
 import { Options } from "./options";
 import { PrettyThriftFormatter } from "./PrettyThriftFormatter";
+import { Utility } from "./utility";
 
 export class ThriftFormatter {
-  readonly NEW_LINE = "\n";
-  readonly NEW_LINE_REGEX = /\r?\n/;
-
   options: Options;
 
   constructor(options?: IOptions) {
@@ -20,14 +19,14 @@ export class ThriftFormatter {
 
     content = fmt.format();
 
-    content += this.NEW_LINE;
+    content += Constant.NEW_LINE;
     content = this.deleteExtraEmptyLines(content);
 
     return content;
   }
 
   private deleteExtraEmptyLines(content: string): string {
-    const c = this.splitByLine(content);
+    const c = Utility.splitByLine(content);
     const res: string[] = [];
 
     for (const l of c) {
@@ -38,10 +37,6 @@ export class ThriftFormatter {
       }
     }
 
-    return res.join(this.NEW_LINE);
-  }
-
-  private splitByLine(str: string): string[] {
-    return str.split(this.NEW_LINE_REGEX);
+    return res.join(Constant.NEW_LINE);
   }
 }

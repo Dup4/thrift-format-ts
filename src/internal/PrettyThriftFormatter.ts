@@ -9,6 +9,7 @@ import {
 
 import { PureThriftFormatter } from "./PureThriftFormatter";
 import { Options } from "./options";
+import { Utility } from "./utility";
 
 export class PrettyThriftFormatter extends PureThriftFormatter {
   _data: ThriftData;
@@ -233,7 +234,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
       this._push(text.trim());
 
-      const last_line = token.line + text.split("\n").length - 1;
+      const last_line = token.line + Utility.splitByLine(text).length - 1;
       const is_tight =
         token.type == ThriftParser.SL_COMMENT ||
         PureThriftFormatter._is_EOF(node) ||
@@ -279,7 +280,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
       // align
       if (this._field_padding > 0) {
-        const parts = this._out.split("\n");
+        const parts = Utility.splitByLine(this._out);
         const cur_tail = parts[parts.length - 1];
         const padding = this._field_padding - cur_tail.length;
 
