@@ -190,6 +190,7 @@ export class PureThriftFormatter {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   before_subfields_hook(_: ParseTree[]) {}
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   after_subfields_hook(_: ParseTree[]) {}
 

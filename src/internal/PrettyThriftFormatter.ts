@@ -33,28 +33,24 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     return this.formatNode(this._document);
   }
 
-  patch() {
-    PureThriftFormatter.walk_node(this._document, this._patch_field_req);
+  protected patch() {
+    PureThriftFormatter.walk_node(this._document, this.patchFieldReq);
+
+    PureThriftFormatter.walk_node(this._document, this.patchFieldListSeparator);
 
     PureThriftFormatter.walk_node(
       this._document,
-      this._patch_field_list_separator,
-    );
-
-    PureThriftFormatter.walk_node(
-      this._document,
-      this._patch_remove_last_list_separator,
+      this.patchRemoveLastListSeparator,
     );
   }
 
-  _patch_field_req(n: ParseTree) {
+  protected patchFieldReq(n: ParseTree) {
     if (!(n instanceof ThriftParserAll.FieldContext)) {
       return;
     }
 
     if (
       n.parent === undefined ||
-      n.parent instanceof ThriftParserAll.Function_Context ||
       n.parent instanceof ThriftParserAll.Function_Context
     ) {
       return;
@@ -63,9 +59,11 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     let i = 0;
     for (; i < n.childCount; i++) {
       const child = n.getChild(i);
+
       if (child instanceof ThriftParserAll.Field_reqContext) {
         return;
       }
+
       if (child instanceof ThriftParserAll.Field_typeContext) {
         break;
       }
@@ -79,14 +77,15 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     const fake_ctx = new ThriftParserAll.Field_reqContext(n, 0);
 
     fake_node.setParent(fake_ctx);
-    fake_ctx.addChild(fake_node);
 
+    fake_ctx.addChild(fake_node);
     fake_ctx.setParent(n);
+
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     n.children!.splice(i, 0, fake_ctx);
   }
 
-  _patch_field_list_separator(n: ParseTree) {
+  protected patchFieldListSeparator(n: ParseTree) {
     if (
       !(
         n instanceof ThriftParserAll.Enum_fieldContext ||
@@ -114,12 +113,12 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
     fake_node.setParent(fake_ctx);
     fake_ctx.addChild(fake_node);
-
     fake_ctx.setParent(n);
+
     n.addChild(fake_ctx);
   }
 
-  _patch_remove_last_list_separator(n: ParseTree) {
+  protected patchRemoveLastListSeparator(n: ParseTree) {
     const is_inline_field =
       n instanceof ThriftParserAll.FieldContext &&
       (n.parent instanceof ThriftParserAll.Function_Context ||
@@ -151,6 +150,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
     if (is_last) {
       const child = n.getChild(n.childCount - 1);
+
       if (child instanceof ThriftParserAll.List_separatorContext) {
         n.removeLastChild();
       }
@@ -164,14 +164,8 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
     let padding = 0;
     for (const field of fields) {
-      const field_out = new PureThriftFormatter(this._options).formatNode(
-        field,
-      );
-
-      const field_padding = field_out.length;
-      if (field_padding > padding) {
-        padding = field_padding;
-      }
+      const fieldOut = new PureThriftFormatter(this._options).formatNode(field);
+      padding = Math.max(padding, fieldOut.length);
     }
 
     return padding;
