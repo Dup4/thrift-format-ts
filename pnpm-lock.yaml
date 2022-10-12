@@ -8,21 +8,19 @@ importers:
       '@types/node': ^17.0.45
       '@typescript-eslint/eslint-plugin': ^5.40.0
       '@typescript-eslint/parser': ^5.40.0
-      antlr4ts: 0.5.0-alpha.4
       bumpp: ^7.2.0
       eslint: ^8.25.0
       esmo: ^0.14.1
       npm-run-all: ^4.1.5
       pnpm: ^7.13.4
       prettier: ^2.7.1
-      thrift-parser-typescript: ^0.0.3
+      thrift-parser-typescript: ^0.0.5
       typescript: ^4.8.4
       unbuild: ^0.7.6
       vite: ^2.9.15
       vitest: ^0.7.13
     dependencies:
-      antlr4ts: 0.5.0-alpha.4
-      thrift-parser-typescript: 0.0.3
+      thrift-parser-typescript: 0.0.5
     devDependencies:
       '@babel/types': 7.19.4
       '@types/node': 17.0.45
@@ -2672,8 +2670,8 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
-  /thrift-parser-typescript/0.0.3:
-    resolution: {integrity: sha512-/TmIw+60kUpe0EL/MkEjG9tYlQHc8b73ScOPUuF9S0nIbozoQMMj2iAdBissjdUM0+emPN6eUkVlFWZYOuEKFw==}
+  /thrift-parser-typescript/0.0.5:
+    resolution: {integrity: sha512-C4X6OCMDkqPK4daSHbJmRXXsMfHbfZKGFp8gV1ETgGlB3eAAuRcfyq3YojOCIuYztQMyT4D8QStzu1E90VN3TQ==}
     dependencies:
       antlr4ts: 0.5.0-alpha.4
     dev: false

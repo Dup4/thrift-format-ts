@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ThriftData } from "thrift-parser-typescript";
+
 import { IOptions } from "../types";
-import { ThriftData, Token } from "thrift-parser-typescript";
+import { Options } from "./options";
+import { PrettyThriftFormatter } from "./PrettyThriftFormatter";
 
-class Options implements IOptions {
-  indent = 4;
-}
-
-class ThriftFormatter {
+export class ThriftFormatter {
   readonly NEW_LINE = "\r\n";
   readonly NEW_LINE_REGEX = /\r?\n/;
 
-  options: IOptions;
+  options: Options;
 
   constructor(options?: IOptions) {
     this.options = { ...new Options(), ...options };
@@ -20,10 +18,9 @@ class ThriftFormatter {
     content += this.NEW_LINE;
     content = this.deleteExtraEmptyLines(content);
 
-    const thriftData = ThriftData.fromString(content);
-    const tokens = thriftData.tokenStream.getTokens();
-
-    return this.reFormatByTokens(tokens);
+    const data = ThriftData.fromString(content);
+    const fmt = new PrettyThriftFormatter(data, this.options);
+    return fmt.format();
   }
 
   private deleteExtraEmptyLines(content: string): string {
@@ -44,22 +41,4 @@ class ThriftFormatter {
   private splitByLine(str: string): string[] {
     return str.split(this.NEW_LINE_REGEX);
   }
-
-  private reFormatByTokens(tokens: Token[]): string {
-    let res = "";
-
-    for (const token of tokens) {
-      // <EOF>
-      if (token.type == -1) {
-        continue;
-      }
-
-      res += token.text;
-    }
-
-    return res;
-  }
 }
-
-export { ThriftFormatter };
-export default ThriftFormatter;

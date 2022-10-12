@@ -8,16 +8,12 @@ function getFullPath(file_name: string): string {
   return path.resolve(__dirname, "test_data", file_name).toString();
 }
 
-describe("should", () => {
-  it("exported", () => {
-    const thriftContent = fs.readFileSync(getFullPath("a.thrift")).toString();
-    expect(formatThrift(thriftContent)).matchSnapshot();
-  });
+describe("ThriftFormatter", () => {
+  it("format", () => {
+    for (const file of fs.readdirSync(getFullPath(""))) {
+      const content = fs.readFileSync(getFullPath(file)).toString();
 
-  it("exported", () => {
-    const thriftContent = fs
-      .readFileSync(getFullPath("ThriftTest.thrift"))
-      .toString();
-    expect(formatThrift(thriftContent)).matchSnapshot();
+      expect(formatThrift(content)).matchSnapshot();
+    }
   });
 });

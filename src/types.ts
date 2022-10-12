@@ -1,4 +1,5 @@
 export interface IOptions {
   indent?: number;
-  enableLabFormat?: boolean;
+  comment?: boolean;
+  patch?: boolean;
 }

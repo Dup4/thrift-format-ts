@@ -9,6 +9,7 @@
     "esmo",
     "esno",
     "pnpm",
+    "Senum",
     "typecheck",
     "vite",
     "vitest"
