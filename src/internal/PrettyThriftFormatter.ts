@@ -222,13 +222,13 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
       this.push(text.trim());
 
-      const last_line = token.line + Utility.splitByLine(text).length - 1;
-      const is_tight =
+      const lastLine = token.line + Utility.splitByLine(text).length - 1;
+      const isTight =
         token.type == ThriftParser.SL_COMMENT ||
         this.isEOF(node) ||
-        (0 < node.symbol.line - last_line && node.symbol.line - last_line <= 1);
+        (0 < node.symbol.line - lastLine && node.symbol.line - lastLine <= 1);
 
-      if (is_tight) {
+      if (isTight) {
         this.newline();
       } else {
         this.newline(2);
