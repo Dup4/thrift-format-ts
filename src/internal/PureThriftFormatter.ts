@@ -56,7 +56,7 @@ export class PureThriftFormatter {
     this.out += text;
   }
 
-  protected newline(repeat = 1) {
+  protected newLine(repeat = 1) {
     const diff = repeat - this.newlineCount;
 
     if (diff <= 0) {
@@ -142,9 +142,9 @@ export class PureThriftFormatter {
           last_node?.constructor.name !== node.constructor.name ||
           this.isNewlineNode(node)
         ) {
-          this.newline(2);
+          this.newLine(2);
         } else {
-          this.newline();
+          this.newLine();
         }
       }
 
@@ -198,7 +198,7 @@ export class PureThriftFormatter {
     return function (this: PureThriftFormatter, node: ParseTree) {
       const children = this.getChildren(node);
       this.inlineNodes(children.slice(0, start));
-      this.newline();
+      this.newLine();
 
       const [fields, left] = this.getRepeatChildren(
         children.slice(start),
@@ -208,7 +208,7 @@ export class PureThriftFormatter {
       this.beforeSubfieldsHook(fields);
       this.blockNodes(fields, " ".repeat(this.options.indent));
       this.afterSubfieldsHook(fields);
-      this.newline();
+      this.newLine();
 
       this.inlineNodes(left);
     };

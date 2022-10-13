@@ -2,6 +2,7 @@ namespace cpp idl.c
 
 // a
 // b
+
 struct A {
     1: required 
 

@@ -1,5 +1,3 @@
-import { ThriftData } from "thrift-parser-typescript";
-
 import { IOptions } from "../types";
 import { Constant } from "./constant";
 import { Options } from "./options";
@@ -14,9 +12,7 @@ export class ThriftFormatter {
   }
 
   public format(content: string): string {
-    const data = ThriftData.fromString(content);
-    const fmt = new PrettyThriftFormatter(data, this.options);
-
+    const fmt = new PrettyThriftFormatter(content, this.options);
     content = fmt.format();
 
     content += Constant.NEW_LINE;

@@ -36,10 +36,12 @@ namespace py.twisted ThriftTest
 namespace rb Thrift.Test
 namespace st ThriftTest
 namespace xsd test (uri = 'http://thrift.apache.org/ns/ThriftTest')
+
 // Presence of namespaces and sub-namespaces for which there is
 // no generator should compile with warnings only
 namespace noexist ThriftTest
 namespace cpp.noexist ThriftTest
+
 namespace * thrift.test
 
 /**
@@ -58,6 +60,7 @@ const Numberz myNumberz = Numberz.ONE ;
 
 // the following is expected to fail:
 // const Numberz urNumberz = ONE;
+
 typedef i64 UserId
 
 struct Bonk {
@@ -327,6 +330,7 @@ struct VersioningTestV1 {
 
 struct VersioningTestV2 {
     1: i32 begin_in_both,
+
     2: i32 newint,
     3: i8 newbyte,
     4: i16 newshort,

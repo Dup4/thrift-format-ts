@@ -10,18 +10,26 @@ import {
 import { PureThriftFormatter } from "./PureThriftFormatter";
 import { Options } from "./options";
 import { Utility } from "./utility";
+import { Constant } from "./constant";
 
 export class PrettyThriftFormatter extends PureThriftFormatter {
+  public content: string;
+  public lines: string[];
   public data: ThriftData;
   public document: ThriftParserAll.DocumentContext;
 
   protected fieldPadding = 0;
-  protected lastTokenIndex = -1;
 
-  constructor(data: ThriftData, options: Options) {
+  protected lastTokenIndexForComment = -1;
+  protected lastLineForEmptyLine = -1;
+
+  constructor(content: string, options: Options) {
     super(options);
-    this.data = data;
-    this.document = data.document;
+
+    this.content = content;
+    this.lines = Utility.splitByLine(content);
+    this.data = ThriftData.fromString(content);
+    this.document = this.data.document;
   }
 
   public format(): string {
@@ -180,7 +188,23 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     this.tailComment();
   }
 
-  protected lineComments(node: TerminalNode) {
+  protected addEmptyLine(line: number) {
+    if (line <= this.lastLineForEmptyLine) {
+      return;
+    }
+
+    for (let i = line - 2; i >= 0; i--) {
+      if (this.lines[i].trim().length == 0) {
+        this.push(Constant.NEW_LINE);
+      } else {
+        break;
+      }
+    }
+
+    this.lastLineForEmptyLine = line;
+  }
+
+  protected addLineComments(node: TerminalNode) {
     if (!this.options.comment) {
       return;
     }
@@ -194,7 +218,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     const comments = [];
     const tokens = this.data.tokenStream.getTokens();
 
-    for (const token of tokens.slice(this.lastTokenIndex + 1)) {
+    for (const token of tokens.slice(this.lastTokenIndexForComment + 1)) {
       if (token.channel != 2) {
         continue;
       }
@@ -206,12 +230,14 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
     for (const token of comments) {
       if (token.tokenIndex > 0 && token.type == ThriftParser.ML_COMMENT) {
-        this.newline(2);
+        this.newLine(2);
       }
 
       if (token.text === undefined) {
-        return;
+        continue;
       }
+
+      this.addEmptyLine(token.line);
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const text = token.text!;
@@ -223,19 +249,20 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       this.push(text.trim());
 
       const lastLine = token.line + Utility.splitByLine(text).length - 1;
+      const diffLine = node.symbol.line - lastLine;
       const isTight =
         token.type == ThriftParser.SL_COMMENT ||
         this.isEOF(node) ||
-        (0 < node.symbol.line - lastLine && node.symbol.line - lastLine <= 1);
+        (diffLine > 0 && diffLine <= 1);
 
       if (isTight) {
-        this.newline();
+        this.newLine();
       } else {
-        this.newline(2);
+        this.newLine(2);
       }
     }
 
-    this.lastTokenIndex = tokenIndex;
+    this.lastTokenIndexForComment = tokenIndex;
   }
 
   protected tailComment() {
@@ -243,15 +270,15 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       return;
     }
 
-    if (this.lastTokenIndex === -1) {
+    if (this.lastTokenIndexForComment === -1) {
       return;
     }
 
     const tokens = this.data.tokenStream.getTokens();
-    const last_token = tokens[this.lastTokenIndex];
+    const last_token = tokens[this.lastTokenIndexForComment];
     const comments = [];
 
-    for (const token of tokens.slice(this.lastTokenIndex + 1)) {
+    for (const token of tokens.slice(this.lastTokenIndexForComment + 1)) {
       if (token.line != last_token.line) {
         break;
       }
@@ -281,7 +308,8 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.append(comment.text!.trim());
       this.push("");
-      this.lastTokenIndex = comment.tokenIndex;
+
+      this.lastTokenIndexForComment = comment.tokenIndex;
     }
   }
 
@@ -292,7 +320,11 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       this.tailComment();
     }
 
-    this.lineComments(node);
+    console.log(`TerminalNode ${node.symbol.text}`);
+
+    this.addLineComments(node);
+    this.addEmptyLine(node.symbol.line);
+
     super.TerminalNode(node);
   }
 }

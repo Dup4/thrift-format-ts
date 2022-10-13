@@ -85,6 +85,7 @@ exports[`ThriftFormatter > format 2`] = `
 "service ApiTag {
     void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
     void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
     void Deprecated() (deprecated),                                                                                    // no comment
 }
 "
@@ -99,18 +100,20 @@ exports[`ThriftFormatter > format 3`] = `
 
 exports[`ThriftFormatter > format 4`] = `
 "// ServiceLineComment
+
 service ApiTag {
     // Bar Comment
     void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
     // Baz Comment
+
     // Baz Comment
     // Baz Comment
     void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
 
-    /*
-        Foo Comment
-    */
+    /* Foo Comment */
     void Foo() (api.post = \\"/Foo\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
     // Deprecated
     void Deprecated() (deprecated),
 }
@@ -156,10 +159,12 @@ namespace py.twisted ThriftTest
 namespace rb Thrift.Test
 namespace st ThriftTest
 namespace xsd test (uri = 'http://thrift.apache.org/ns/ThriftTest')
+
 // Presence of namespaces and sub-namespaces for which there is
 // no generator should compile with warnings only
 namespace noexist ThriftTest
 namespace cpp.noexist ThriftTest
+
 namespace * thrift.test
 
 /**
@@ -178,6 +183,7 @@ const Numberz myNumberz = Numberz.ONE ;
 
 // the following is expected to fail:
 // const Numberz urNumberz = ONE;
+
 typedef i64 UserId
 
 struct Bonk {
@@ -447,6 +453,7 @@ struct VersioningTestV1 {
 
 struct VersioningTestV2 {
     1: i32 begin_in_both,
+
     2: i32 newint,
     3: i8 newbyte,
     4: i16 newshort,
@@ -534,6 +541,7 @@ exports[`ThriftFormatter > format 6`] = `
 
 // a
 // b
+
 struct A {
     1: required string a,
     2: required i32 b,
@@ -551,6 +559,7 @@ exports[`ThriftFormatter > format 7`] = `
 
 // a
 // b
+
 struct A {
     1: required 
 
@@ -628,18 +637,21 @@ exports[`ThriftFormatter > format 10`] = `
 `;
 
 exports[`ThriftFormatter > format 11`] = `
-"service ApiTag {
+"// ServiceLineComment
+
+service ApiTag {
     // Bar Comment
     void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
     // Baz Comment
+
     // Baz Comment
     // Baz Comment
     void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
 
-    /*
-        Foo Comment
-    */
+    /* Foo Comment */
     void Foo() (api.post = \\"/Foo\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
     // Deprecated
     void Deprecated() (deprecated),
 }
@@ -755,7 +767,9 @@ service Calculator extends shared.SharedService {
    */
 
     void ping(),
+
     i32 add(1: i32 num1, 2: i32 num2),
+
     i32 calculate(1: i32 logid, 2: Work w) throws(1: InvalidOperation ouch),
 
     /**
@@ -764,6 +778,7 @@ service Calculator extends shared.SharedService {
     * must be void.
     */
     oneway void zip(),
+
 }
 
 /**
@@ -772,5 +787,27 @@ service Calculator extends shared.SharedService {
  * in folders with names gen-<language>. The generated code isn't too scary
  * to look at. It even has pretty indentation.
  */
+"
+`;
+
+exports[`ThriftFormatter > formatToken 1`] = `
+"// ServiceLineComment
+
+service ApiTag {
+    // Bar Comment
+    void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
+    // Baz Comment
+
+    // Baz Comment
+    // Baz Comment
+    void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
+    /* Foo Comment */
+    void Foo() (api.post = \\"/Foo\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+
+    // Deprecated
+    void Deprecated() (deprecated),
+}
 "
 `;
