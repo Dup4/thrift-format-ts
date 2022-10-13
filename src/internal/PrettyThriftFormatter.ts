@@ -12,31 +12,30 @@ import { Options } from "./options";
 import { Utility } from "./utility";
 
 export class PrettyThriftFormatter extends PureThriftFormatter {
-  _data: ThriftData;
-  _document: ThriftParserAll.DocumentContext;
+  public data: ThriftData;
+  public document: ThriftParserAll.DocumentContext;
 
-  _field_padding = 0;
-  _last_token_index = -1;
+  protected fieldPadding = 0;
+  protected lastTokenIndex = -1;
 
   constructor(data: ThriftData, options: Options) {
     super(options);
-
-    this._data = data;
-    this._document = data.document;
+    this.data = data;
+    this.document = data.document;
   }
 
   public format(): string {
-    if (this._options.patch) {
+    if (this.options.patch) {
       this.patch();
     }
 
-    return this.formatNode(this._document);
+    return this.formatNode(this.document);
   }
 
   protected patch() {
-    // this.walkNode(this._document, this.patchFieldReq);
-    this.walkNode(this._document, this.patchFieldListSeparator);
-    this.walkNode(this._document, this.patchRemoveLastListSeparator);
+    // this.walkNode(this.document, this.patchFieldReq);
+    this.walkNode(this.document, this.patchFieldListSeparator);
+    this.walkNode(this.document, this.patchRemoveLastListSeparator);
   }
 
   protected patchFieldReq(n: ParseTree) {
@@ -160,7 +159,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
     let padding = 0;
     for (const field of fields) {
-      const fieldOut = new PureThriftFormatter(this._options).formatNode(field);
+      const fieldOut = new PureThriftFormatter(this.options).formatNode(field);
       padding = Math.max(padding, fieldOut.length);
     }
 
@@ -168,13 +167,12 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
   }
 
   protected beforeSubfieldsHook(fields: ParseTree[]) {
-    this._field_padding =
-      this.calcSubfieldsPadding(fields) + this._options.indent;
+    this.fieldPadding = this.calcSubfieldsPadding(fields) + this.options.indent;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected afterSubfieldsHook(_: ParseTree[]) {
-    this._field_padding = 0;
+    this.fieldPadding = 0;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -183,7 +181,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
   }
 
   protected lineComments(node: TerminalNode) {
-    if (!this._options.comment) {
+    if (!this.options.comment) {
       return;
     }
 
@@ -194,9 +192,9 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
     const tokenIndex = node.symbol.tokenIndex;
     const comments = [];
-    const tokens = this._data.tokenStream.getTokens();
+    const tokens = this.data.tokenStream.getTokens();
 
-    for (const token of tokens.slice(this._last_token_index + 1)) {
+    for (const token of tokens.slice(this.lastTokenIndex + 1)) {
       if (token.channel != 2) {
         continue;
       }
@@ -218,8 +216,8 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const text = token.text!;
 
-      if (this._indent_s.length > 0) {
-        this.push(this._indent_s);
+      if (this.indentS.length > 0) {
+        this.push(this.indentS);
       }
 
       this.push(text.trim());
@@ -237,23 +235,23 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       }
     }
 
-    this._last_token_index = tokenIndex;
+    this.lastTokenIndex = tokenIndex;
   }
 
   protected tailComment() {
-    if (!this._options.comment) {
+    if (!this.options.comment) {
       return;
     }
 
-    if (this._last_token_index === -1) {
+    if (this.lastTokenIndex === -1) {
       return;
     }
 
-    const tokens = this._data.tokenStream.getTokens();
-    const last_token = tokens[this._last_token_index];
+    const tokens = this.data.tokenStream.getTokens();
+    const last_token = tokens[this.lastTokenIndex];
     const comments = [];
 
-    for (const token of tokens.slice(this._last_token_index + 1)) {
+    for (const token of tokens.slice(this.lastTokenIndex + 1)) {
       if (token.line != last_token.line) {
         break;
       }
@@ -269,10 +267,10 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       const comment = comments[0];
 
       // align
-      if (this._field_padding > 0) {
-        const parts = Utility.splitByLine(this._out);
+      if (this.fieldPadding > 0) {
+        const parts = Utility.splitByLine(this.out);
         const cur_tail = parts[parts.length - 1];
-        const padding = this._field_padding - cur_tail.length;
+        const padding = this.fieldPadding - cur_tail.length;
 
         if (padding > 0) {
           this.append(" ".repeat(padding));
@@ -283,14 +281,14 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.append(comment.text!.trim());
       this.push("");
-      this._last_token_index = comment.tokenIndex;
+      this.lastTokenIndex = comment.tokenIndex;
     }
   }
 
   TerminalNode(n: ParseTree) {
     const node = <TerminalNode>n;
 
-    if (this._newline_count > 0) {
+    if (this.newlineCount > 0) {
       this.tailComment();
     }
 

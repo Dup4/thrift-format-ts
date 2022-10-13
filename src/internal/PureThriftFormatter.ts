@@ -14,27 +14,23 @@ type TightFN = (index: number, node: ParseTree) => boolean;
 type NodeProcessFunc = (this: PureThriftFormatter, node: ParseTree) => void;
 
 export class PureThriftFormatter {
-  protected _options: Options;
+  public options: Options;
 
-  protected _newline_count = 0;
-  protected _indent_s = "";
-  protected _out = "";
+  protected newlineCount = 0;
+  protected indentS = "";
+  protected out = "";
 
   constructor(options: Options) {
-    this._options = options;
-  }
-
-  get options(): Options {
-    return this._options;
+    this.options = options;
   }
 
   public formatNode(node: ParseTree): string {
-    this._out = "";
-    this._newline_count = 0;
-    this._indent_s = "";
+    this.out = "";
+    this.newlineCount = 0;
+    this.indentS = "";
 
     this.processNode(node);
-    return this._out;
+    return this.out;
   }
 
   protected getChildren(node: ParseTree): Nodes {
@@ -48,30 +44,30 @@ export class PureThriftFormatter {
   }
 
   protected push(text: string) {
-    if (this._newline_count > 0) {
-      this._out += Constant.NEW_LINE.repeat(this._newline_count);
-      this._newline_count = 0;
+    if (this.newlineCount > 0) {
+      this.out += Constant.NEW_LINE.repeat(this.newlineCount);
+      this.newlineCount = 0;
     }
 
-    this._out += text;
+    this.out += text;
   }
 
   protected append(text: string) {
-    this._out += text;
+    this.out += text;
   }
 
   protected newline(repeat = 1) {
-    const diff = repeat - this._newline_count;
+    const diff = repeat - this.newlineCount;
 
     if (diff <= 0) {
       return;
     }
 
-    this._newline_count += diff;
+    this.newlineCount += diff;
   }
 
   protected indent(indent = "") {
-    this._indent_s = indent;
+    this.indentS = indent;
   }
 
   protected walkNode(root: ParseTree, callback: (node: ParseTree) => void) {
@@ -309,9 +305,9 @@ export class PureThriftFormatter {
       return;
     }
 
-    if (this._indent_s.length > 0) {
-      this.push(this._indent_s);
-      this._indent_s = "";
+    if (this.indentS.length > 0) {
+      this.push(this.indentS);
+      this.indentS = "";
     }
 
     this.push(node.symbol.text ?? "");

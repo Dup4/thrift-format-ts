@@ -98,6 +98,18 @@ exports[`ThriftFormatter > format 3`] = `
 `;
 
 exports[`ThriftFormatter > format 4`] = `
+"service ApiTag {
+    // Bar
+    void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+    // Baz
+    void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+    // Deprecated
+    void Deprecated() (deprecated),
+}
+"
+`;
+
+exports[`ThriftFormatter > format 5`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -509,7 +521,7 @@ struct OptionalSetDefaultTest {
 "
 `;
 
-exports[`ThriftFormatter > format 5`] = `
+exports[`ThriftFormatter > format 6`] = `
 "namespace cpp idl.c
 
 // a
@@ -526,7 +538,7 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 6`] = `
+exports[`ThriftFormatter > format 7`] = `
 "namespace cpp idl.c
 
 // a
@@ -547,13 +559,13 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 7`] = `
+exports[`ThriftFormatter > format 8`] = `
 "const string default_user = \\"\\\\'default_user\\\\'\\" ;
 const string default_name = '\\"abc\\\\'s\\"' ;
 "
 `;
 
-exports[`ThriftFormatter > format 8`] = `
+exports[`ThriftFormatter > format 9`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -602,12 +614,12 @@ service SharedService {
 "
 `;
 
-exports[`ThriftFormatter > format 9`] = `
+exports[`ThriftFormatter > format 10`] = `
 "include \\"shared.thrift\\"
 "
 `;
 
-exports[`ThriftFormatter > format 10`] = `
+exports[`ThriftFormatter > format 11`] = `
 "struct foo {
     1: i32 bar (presence = \\"required\\"),
     2: i32 baz (presence = \\"manual\\", cpp.use_pointer = \\"\\"),
@@ -617,7 +629,7 @@ exports[`ThriftFormatter > format 10`] = `
 "
 `;
 
-exports[`ThriftFormatter > format 11`] = `
+exports[`ThriftFormatter > format 12`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
