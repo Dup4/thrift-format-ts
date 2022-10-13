@@ -185,7 +185,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       return;
     }
 
-    // fake_token
+    // fakeToken
     if (node.symbol.line === -1) {
       return;
     }
@@ -285,7 +285,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     }
   }
 
-  TerminalNode(n: ParseTree) {
+  protected TerminalNode(n: ParseTree) {
     const node = <TerminalNode>n;
 
     if (this.newlineCount > 0) {

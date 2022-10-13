@@ -214,7 +214,7 @@ export class PureThriftFormatter {
     };
   }
 
-  processNode(node: ParseTree): void {
+  protected processNode(node: ParseTree): void {
     if (node instanceof TerminalNode) {
       this.TerminalNode(node);
     } else if (node instanceof ThriftParserAll.DocumentContext) {
@@ -298,7 +298,7 @@ export class PureThriftFormatter {
     }
   }
 
-  TerminalNode(n: ParseTree) {
+  protected TerminalNode(n: ParseTree) {
     const node = <TerminalNode>n;
 
     if (this.isEOF(node)) {
@@ -313,7 +313,7 @@ export class PureThriftFormatter {
     this.push(node.symbol.text ?? "");
   }
 
-  DocumentContext: NodeProcessFunc = function (
+  protected DocumentContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     node: ParseTree,
   ) {
@@ -321,46 +321,46 @@ export class PureThriftFormatter {
     this.blockNodes(children);
   };
 
-  HeaderContext: NodeProcessFunc = function (
+  protected HeaderContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     node: ParseTree,
   ) {
     this.processNode(node.getChild(0));
   };
 
-  DefinitionContext: NodeProcessFunc = function (
+  protected DefinitionContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     node: ParseTree,
   ) {
     this.processNode(node.getChild(0));
   };
 
-  Include_Context: NodeProcessFunc = this.genInlineContext();
-  Namespace_Context: NodeProcessFunc = this.genInlineContext();
-  Typedef_Context: NodeProcessFunc = this.genInlineContext();
-  Base_typeContext: NodeProcessFunc = this.genInlineContext();
-  Field_typeContext: NodeProcessFunc = this.genInlineContext();
-  Real_base_typeContext: NodeProcessFunc = this.genInlineContext();
-  Const_ruleContext: NodeProcessFunc = this.genInlineContext();
-  Const_valueContext: NodeProcessFunc = this.genInlineContext();
-  IntegerContext: NodeProcessFunc = this.genInlineContext();
-  Container_typeContext: NodeProcessFunc = this.genInlineContext("");
-  Set_typeContext: NodeProcessFunc = this.genInlineContext("");
-  List_typeContext: NodeProcessFunc = this.genInlineContext("");
-  Cpp_typeContext: NodeProcessFunc = this.genInlineContext();
-  Const_mapContext: NodeProcessFunc = this.genInlineContext();
-  Const_map_entryContext: NodeProcessFunc = this.genInlineContext();
-  List_separatorContext: NodeProcessFunc = this.genInlineContext();
-  Field_idContext: NodeProcessFunc = this.genInlineContext("");
-  Field_reqContext: NodeProcessFunc = this.genInlineContext(" ");
+  protected Include_Context: NodeProcessFunc = this.genInlineContext();
+  protected Namespace_Context: NodeProcessFunc = this.genInlineContext();
+  protected Typedef_Context: NodeProcessFunc = this.genInlineContext();
+  protected Base_typeContext: NodeProcessFunc = this.genInlineContext();
+  protected Field_typeContext: NodeProcessFunc = this.genInlineContext();
+  protected Real_base_typeContext: NodeProcessFunc = this.genInlineContext();
+  protected Const_ruleContext: NodeProcessFunc = this.genInlineContext();
+  protected Const_valueContext: NodeProcessFunc = this.genInlineContext();
+  protected IntegerContext: NodeProcessFunc = this.genInlineContext();
+  protected Container_typeContext: NodeProcessFunc = this.genInlineContext("");
+  protected Set_typeContext: NodeProcessFunc = this.genInlineContext("");
+  protected List_typeContext: NodeProcessFunc = this.genInlineContext("");
+  protected Cpp_typeContext: NodeProcessFunc = this.genInlineContext();
+  protected Const_mapContext: NodeProcessFunc = this.genInlineContext();
+  protected Const_map_entryContext: NodeProcessFunc = this.genInlineContext();
+  protected List_separatorContext: NodeProcessFunc = this.genInlineContext();
+  protected Field_idContext: NodeProcessFunc = this.genInlineContext("");
+  protected Field_reqContext: NodeProcessFunc = this.genInlineContext(" ");
 
-  Map_typeContext: NodeProcessFunc = this.genInlineContext(
+  protected Map_typeContext: NodeProcessFunc = this.genInlineContext(
     " ",
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     (i, n) => !this.isToken(n.parent!.getChild(i - 1), ","),
   );
 
-  Const_listContext: NodeProcessFunc = this.genInlineContext(
+  protected Const_listContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (i, n) =>
       !(
@@ -369,37 +369,37 @@ export class PureThriftFormatter {
       ),
   );
 
-  Enum_ruleContext: NodeProcessFunc = this.genSubfieldsContext(
+  protected Enum_ruleContext: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.Enum_fieldContext,
   );
 
-  Enum_fieldContext: NodeProcessFunc = this.genInlineContext(
+  protected Enum_fieldContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (_, node) => node instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Struct_Context: NodeProcessFunc = this.genSubfieldsContext(
+  protected Struct_Context: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.FieldContext,
   );
 
-  Union_Context: NodeProcessFunc = this.genSubfieldsContext(
+  protected Union_Context: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.FieldContext,
   );
 
-  Exception_Context: NodeProcessFunc = this.genSubfieldsContext(
+  protected Exception_Context: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.FieldContext,
   );
 
-  FieldContext: NodeProcessFunc = this.genInlineContext(
+  protected FieldContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (_, n) => n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Function_Context: NodeProcessFunc = this.genInlineContext(
+  protected Function_Context: NodeProcessFunc = this.genInlineContext(
     " ",
     (i, n) =>
       this.isToken(n, "(") ||
@@ -409,11 +409,11 @@ export class PureThriftFormatter {
       n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  OnewayContext: NodeProcessFunc = this.genInlineContext();
+  protected OnewayContext: NodeProcessFunc = this.genInlineContext();
 
-  Function_typeContext: NodeProcessFunc = this.genInlineContext();
+  protected Function_typeContext: NodeProcessFunc = this.genInlineContext();
 
-  Throws_listContext: NodeProcessFunc = this.genInlineContext(
+  protected Throws_listContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (i, n) =>
       this.isToken(n, "(") ||
@@ -423,30 +423,30 @@ export class PureThriftFormatter {
       n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Type_annotationsContext: NodeProcessFunc = this.genInlineContext(
+  protected Type_annotationsContext: NodeProcessFunc = this.genInlineContext(
     " ",
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     (i, n) => !n.parent!.getChild(i - 1).text.endsWith(","),
   );
 
-  Type_annotationContext: NodeProcessFunc = this.genInlineContext(
+  protected Type_annotationContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (_i, n) => n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Annotation_valueContext: NodeProcessFunc = this.genInlineContext();
+  protected Annotation_valueContext: NodeProcessFunc = this.genInlineContext();
 
-  ServiceContext_Default: NodeProcessFunc = this.genSubfieldsContext(
+  protected ServiceContext_Default: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.Function_Context,
   );
 
-  ServiceContext_Extends: NodeProcessFunc = this.genSubfieldsContext(
+  protected ServiceContext_Extends: NodeProcessFunc = this.genSubfieldsContext(
     5,
     (n) => n instanceof ThriftParserAll.Function_Context,
   );
 
-  ServiceContext: NodeProcessFunc = function (
+  protected ServiceContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     n: ParseTree,
   ) {
@@ -458,7 +458,7 @@ export class PureThriftFormatter {
     }
   };
 
-  SenumContext: NodeProcessFunc = function (
+  protected SenumContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _n: ParseTree,
