@@ -37,7 +37,7 @@ export class PureThriftFormatter {
     return this._out;
   }
 
-  static getChildren(node: ParseTree): Nodes {
+  protected getChildren(node: ParseTree): Nodes {
     const children = [];
 
     for (let i = 0; i < node.childCount; i++) {
@@ -47,7 +47,7 @@ export class PureThriftFormatter {
     return children;
   }
 
-  _push(text: string) {
+  protected push(text: string) {
     if (this._newline_count > 0) {
       this._out += Constant.NEW_LINE.repeat(this._newline_count);
       this._newline_count = 0;
@@ -56,11 +56,11 @@ export class PureThriftFormatter {
     this._out += text;
   }
 
-  _append(text: string) {
+  protected append(text: string) {
     this._out += text;
   }
 
-  _newline(repeat = 1) {
+  protected newline(repeat = 1) {
     const diff = repeat - this._newline_count;
 
     if (diff <= 0) {
@@ -70,11 +70,11 @@ export class PureThriftFormatter {
     this._newline_count += diff;
   }
 
-  _indent(indent = "") {
+  protected indent(indent = "") {
     this._indent_s = indent;
   }
 
-  static walk_node(root: ParseTree, callback: (node: ParseTree) => void) {
+  protected walkNode(root: ParseTree, callback: (node: ParseTree) => void) {
     const stack: ParseTree[] = [root];
     while (stack.length > 0) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -87,7 +87,7 @@ export class PureThriftFormatter {
     }
   }
 
-  static _get_repeat_children(
+  protected getRepeatChildren(
     nodes: ParseTree[],
     kind_fn: IsKindFunc,
   ): [ParseTree[], ParseTree[]] {
@@ -104,17 +104,17 @@ export class PureThriftFormatter {
     return [children, []];
   }
 
-  static _is_EOF(node: ParseTree): boolean {
+  protected isEOF(node: ParseTree): boolean {
     return (
       node instanceof TerminalNode && node.symbol.type === ThriftParser.EOF
     );
   }
 
-  static _is_token(node: ParseTree, text: string): boolean {
+  protected isToken(node: ParseTree, text: string): boolean {
     return node instanceof TerminalNode && node.symbol.text === text;
   }
 
-  static _is_newline_node(node: ParseTree): boolean {
+  protected isNewlineNode(node: ParseTree): boolean {
     return (
       node instanceof ThriftParserAll.Enum_ruleContext ||
       node instanceof ThriftParserAll.Struct_Context ||
@@ -125,11 +125,11 @@ export class PureThriftFormatter {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  after_block_node_hook(_: ParseTree) {}
+  protected beforeBlockNodeHook(_: ParseTree) {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  before_block_node_hook(_: ParseTree) {}
+  protected afterBlockNodeHook(_: ParseTree) {}
 
-  _block_nodes(nodes: ParseTree[], indent = "") {
+  protected blockNodes(nodes: ParseTree[], indent = "") {
     let last_node: ParseTree | undefined = undefined;
 
     // eslint-disable-next-line prefer-const
@@ -144,32 +144,32 @@ export class PureThriftFormatter {
       if (index > 0) {
         if (
           last_node?.constructor.name !== node.constructor.name ||
-          PureThriftFormatter._is_newline_node(node)
+          this.isNewlineNode(node)
         ) {
-          this._newline(2);
+          this.newline(2);
         } else {
-          this._newline();
+          this.newline();
         }
       }
 
-      this._indent(indent);
+      this.indent(indent);
       this.processNode(node);
-      this.after_block_node_hook(node);
+      this.afterBlockNodeHook(node);
       last_node = node;
     }
   }
 
-  _inline_nodes(nodes: ParseTree[], join = " ") {
+  protected inlineNodes(nodes: ParseTree[], join = " ") {
     for (const [index, node] of nodes.entries()) {
       if (index > 0) {
-        this._push(join);
+        this.push(join);
       }
 
       this.processNode(node);
     }
   }
 
-  static _gen_inline_Context(
+  protected genInlineContext(
     join = " ",
     tight_fn?: TightFN | undefined,
   ): NodeProcessFunc {
@@ -179,7 +179,7 @@ export class PureThriftFormatter {
 
         if (i > 0 && join.length > 0) {
           if (!tight_fn || !tight_fn(i, child)) {
-            this._push(join);
+            this.push(join);
           }
         }
 
@@ -189,31 +189,30 @@ export class PureThriftFormatter {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  before_subfields_hook(_: ParseTree[]) {}
-
+  protected beforeSubfieldsHook(_: ParseTree[]) {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  after_subfields_hook(_: ParseTree[]) {}
+  protected afterSubfieldsHook(_: ParseTree[]) {}
 
-  static _gen_subfields_Context(
+  protected genSubfieldsContext(
     start: number,
     kind_fn: IsKindFunc,
   ): NodeProcessFunc {
     return function (this: PureThriftFormatter, node: ParseTree) {
-      const children = PureThriftFormatter.getChildren(node);
-      this._inline_nodes(children.slice(0, start));
-      this._newline();
+      const children = this.getChildren(node);
+      this.inlineNodes(children.slice(0, start));
+      this.newline();
 
-      const [fields, left] = PureThriftFormatter._get_repeat_children(
+      const [fields, left] = this.getRepeatChildren(
         children.slice(start),
         kind_fn,
       );
 
-      this.before_subfields_hook(fields);
-      this._block_nodes(fields, " ".repeat(this.options.indent));
-      this.after_subfields_hook(fields);
-      this._newline();
+      this.beforeSubfieldsHook(fields);
+      this.blockNodes(fields, " ".repeat(this.options.indent));
+      this.afterSubfieldsHook(fields);
+      this.newline();
 
-      this._inline_nodes(left);
+      this.inlineNodes(left);
     };
   }
 
@@ -304,24 +303,24 @@ export class PureThriftFormatter {
   TerminalNode(n: ParseTree) {
     const node = <TerminalNode>n;
 
-    if (PureThriftFormatter._is_EOF(node)) {
+    if (this.isEOF(node)) {
       return;
     }
 
     if (this._indent_s.length > 0) {
-      this._push(this._indent_s);
+      this.push(this._indent_s);
       this._indent_s = "";
     }
 
-    this._push(node.symbol.text ?? "");
+    this.push(node.symbol.text ?? "");
   }
 
   DocumentContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     node: ParseTree,
   ) {
-    const children = PureThriftFormatter.getChildren(node);
-    this._block_nodes(children);
+    const children = this.getChildren(node);
+    this.blockNodes(children);
   };
 
   HeaderContext: NodeProcessFunc = function (
@@ -338,152 +337,115 @@ export class PureThriftFormatter {
     this.processNode(node.getChild(0));
   };
 
-  Include_Context: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
+  Include_Context: NodeProcessFunc = this.genInlineContext();
+  Namespace_Context: NodeProcessFunc = this.genInlineContext();
+  Typedef_Context: NodeProcessFunc = this.genInlineContext();
+  Base_typeContext: NodeProcessFunc = this.genInlineContext();
+  Field_typeContext: NodeProcessFunc = this.genInlineContext();
+  Real_base_typeContext: NodeProcessFunc = this.genInlineContext();
+  Const_ruleContext: NodeProcessFunc = this.genInlineContext();
+  Const_valueContext: NodeProcessFunc = this.genInlineContext();
+  IntegerContext: NodeProcessFunc = this.genInlineContext();
+  Container_typeContext: NodeProcessFunc = this.genInlineContext("");
+  Set_typeContext: NodeProcessFunc = this.genInlineContext("");
+  List_typeContext: NodeProcessFunc = this.genInlineContext("");
+  Cpp_typeContext: NodeProcessFunc = this.genInlineContext();
+  Const_mapContext: NodeProcessFunc = this.genInlineContext();
+  Const_map_entryContext: NodeProcessFunc = this.genInlineContext();
+  List_separatorContext: NodeProcessFunc = this.genInlineContext();
+  Field_idContext: NodeProcessFunc = this.genInlineContext("");
+  Field_reqContext: NodeProcessFunc = this.genInlineContext(" ");
 
-  Namespace_Context: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  Typedef_Context: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
-
-  Base_typeContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
-
-  Field_typeContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  Real_base_typeContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  Const_ruleContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  Const_valueContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  IntegerContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
-
-  Container_typeContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context("");
-
-  Set_typeContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context("");
-
-  List_typeContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context("");
-
-  Cpp_typeContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
-
-  Const_mapContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
-
-  Const_map_entryContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  List_separatorContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
-
-  Field_idContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context("");
-
-  Field_reqContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context(" ");
-
-  Map_typeContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context(
+  Map_typeContext: NodeProcessFunc = this.genInlineContext(
     " ",
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    (i, n) => !PureThriftFormatter._is_token(n.parent!.getChild(i - 1), ","),
+    (i, n) => !this.isToken(n.parent!.getChild(i - 1), ","),
   );
 
-  Const_listContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context(
+  Const_listContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (_, n) => n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Enum_ruleContext: NodeProcessFunc =
-    PureThriftFormatter._gen_subfields_Context(
-      3,
-      (n) => n instanceof ThriftParserAll.Enum_fieldContext,
-    );
+  Enum_ruleContext: NodeProcessFunc = this.genSubfieldsContext(
+    3,
+    (n) => n instanceof ThriftParserAll.Enum_fieldContext,
+  );
 
-  Enum_fieldContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context(
+  Enum_fieldContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (_, node) => node instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Struct_Context: NodeProcessFunc = PureThriftFormatter._gen_subfields_Context(
+  Struct_Context: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.FieldContext,
   );
 
-  Union_Context: NodeProcessFunc = PureThriftFormatter._gen_subfields_Context(
+  Union_Context: NodeProcessFunc = this.genSubfieldsContext(
     3,
     (n) => n instanceof ThriftParserAll.FieldContext,
   );
 
-  Exception_Context: NodeProcessFunc =
-    PureThriftFormatter._gen_subfields_Context(
-      3,
-      (n) => n instanceof ThriftParserAll.FieldContext,
-    );
+  Exception_Context: NodeProcessFunc = this.genSubfieldsContext(
+    3,
+    (n) => n instanceof ThriftParserAll.FieldContext,
+  );
 
-  FieldContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context(
+  FieldContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (_, n) => n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Function_Context: NodeProcessFunc = PureThriftFormatter._gen_inline_Context(
+  Function_Context: NodeProcessFunc = this.genInlineContext(
     " ",
     (i, n) =>
-      PureThriftFormatter._is_token(n, "(") ||
-      PureThriftFormatter._is_token(n, ")") ||
+      this.isToken(n, "(") ||
+      this.isToken(n, ")") ||
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      PureThriftFormatter._is_token(n.parent!.getChild(i - 1), "(") ||
+      this.isToken(n.parent!.getChild(i - 1), "(") ||
       n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  OnewayContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context();
+  OnewayContext: NodeProcessFunc = this.genInlineContext();
 
-  Function_typeContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
+  Function_typeContext: NodeProcessFunc = this.genInlineContext();
 
-  Throws_listContext: NodeProcessFunc = PureThriftFormatter._gen_inline_Context(
+  Throws_listContext: NodeProcessFunc = this.genInlineContext(
     " ",
     (i, n) =>
-      PureThriftFormatter._is_token(n, "(") ||
-      PureThriftFormatter._is_token(n, ")") ||
+      this.isToken(n, "(") ||
+      this.isToken(n, ")") ||
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      PureThriftFormatter._is_token(n.parent!.getChild(i - 1), "(") ||
+      this.isToken(n.parent!.getChild(i - 1), "(") ||
       n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Type_annotationsContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
+  Type_annotationsContext: NodeProcessFunc = this.genInlineContext();
 
-  Type_annotationContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context(
-      " ",
-      (_i, n) => n instanceof ThriftParserAll.List_separatorContext,
-    );
+  Type_annotationContext: NodeProcessFunc = this.genInlineContext(
+    " ",
+    (_i, n) => n instanceof ThriftParserAll.List_separatorContext,
+  );
 
-  Annotation_valueContext: NodeProcessFunc =
-    PureThriftFormatter._gen_inline_Context();
+  Annotation_valueContext: NodeProcessFunc = this.genInlineContext();
 
-  ServiceContext_Default: NodeProcessFunc =
-    PureThriftFormatter._gen_subfields_Context(
-      3,
-      (n) => n instanceof ThriftParserAll.Function_Context,
-    );
+  ServiceContext_Default: NodeProcessFunc = this.genSubfieldsContext(
+    3,
+    (n) => n instanceof ThriftParserAll.Function_Context,
+  );
 
-  ServiceContext_Extends: NodeProcessFunc =
-    PureThriftFormatter._gen_subfields_Context(
-      5,
-      (n) => n instanceof ThriftParserAll.Function_Context,
-    );
+  ServiceContext_Extends: NodeProcessFunc = this.genSubfieldsContext(
+    5,
+    (n) => n instanceof ThriftParserAll.Function_Context,
+  );
 
   ServiceContext: NodeProcessFunc = function (
     this: PureThriftFormatter,
     n: ParseTree,
   ) {
     const node = <ThriftParserAll.ServiceContext>n;
-    if (PureThriftFormatter._is_token(node.getChild(2), "extends")) {
+    if (this.isToken(node.getChild(2), "extends")) {
       this.ServiceContext_Extends(node);
     } else {
       this.ServiceContext_Default(node);
