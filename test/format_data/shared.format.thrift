@@ -41,5 +41,5 @@ struct SharedStruct {
 }
 
 service SharedService {
-    SharedStruct getStruct(1: i32 key,),
+    SharedStruct getStruct(1: i32 key),
 }

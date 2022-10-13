@@ -36,7 +36,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
   protected patch() {
     // this.walkNode(this._document, this.patchFieldReq);
     this.walkNode(this._document, this.patchFieldListSeparator);
-    // this.walkNode(this._document, this.patchRemoveLastListSeparator);
+    this.walkNode(this._document, this.patchRemoveLastListSeparator);
   }
 
   protected patchFieldReq(n: ParseTree) {
@@ -99,18 +99,19 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       return;
     }
 
-    const fake_token = new CommonToken(ThriftParser.COMMA, ",");
-    fake_token.line = -1;
-    fake_token.charPositionInLine = -1;
-    fake_token.tokenIndex = -1;
-    const fake_node = new TerminalNode(fake_token);
-    const fake_ctx = new ThriftParserAll.List_separatorContext(n, 0);
+    // add last comma
+    const fakeToken = new CommonToken(ThriftParser.COMMA, ",");
+    fakeToken.line = -1;
+    fakeToken.charPositionInLine = -1;
+    fakeToken.tokenIndex = -1;
+    const fakeNode = new TerminalNode(fakeToken);
+    const fakeCtx = new ThriftParserAll.List_separatorContext(n, 0);
 
-    fake_node.setParent(fake_ctx);
-    fake_ctx.addChild(fake_node);
-    fake_ctx.setParent(n);
+    fakeNode.setParent(fakeCtx);
+    fakeCtx.addChild(fakeNode);
+    fakeCtx.setParent(n);
 
-    n.addChild(fake_ctx);
+    n.addChild(fakeCtx);
   }
 
   protected patchRemoveLastListSeparator(n: ParseTree) {

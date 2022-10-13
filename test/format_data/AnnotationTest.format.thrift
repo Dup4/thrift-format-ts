@@ -17,7 +17,7 @@
  * under the License.
  */
 
-typedef list<i32>( cpp.template = "std::list" ) int_linked_list
+typedef list<i32>(cpp.template = "std::list") int_linked_list
 
 //const string default_user = "\'default_user\'" ;
 //const string default_name = '"abc\'s"' ;
@@ -31,29 +31,29 @@ struct User {
 */
 
 struct foo {
-    1: i32 bar ( presence = "required" ),
-    2: i32 baz ( presence = "manual", cpp.use_pointer = "", ),
+    1: i32 bar (presence = "required"),
+    2: i32 baz (presence = "manual", cpp.use_pointer = ""),
     3: i32 qux,
     4: i32 bop,
-} ( cpp.type = "DenseFoo", python.type = "DenseFoo", java.final = "", annotation.without.value, )
+} (cpp.type = "DenseFoo", python.type = "DenseFoo", java.final = "", annotation.without.value)
 
 exception foo_error {
-    1: i32 error_code ( foo = "bar" ),
+    1: i32 error_code (foo = "bar"),
     2: string error_msg,
-} ( foo = "bar" )
+} (foo = "bar")
 
-typedef string ( unicode.encoding = "UTF-16" ) non_latin_string ( foo = "bar" )
-typedef list<double ( cpp.fixed_point = "16" )> tiny_float_list
+typedef string (unicode.encoding = "UTF-16") non_latin_string (foo = "bar")
+typedef list<double (cpp.fixed_point = "16")> tiny_float_list
 
 enum weekdays {
-    SUNDAY ( weekend = "yes" ),
+    SUNDAY (weekend = "yes"),
     MONDAY,
     TUESDAY,
     WEDNESDAY,
     THURSDAY,
     FRIDAY,
-    SATURDAY ( weekend = "yes" ),
-} ( foo.bar = "baz" )
+    SATURDAY (weekend = "yes"),
+} (foo.bar = "baz")
 
 /* Note that annotations on senum values are not supported. */
 
@@ -63,15 +63,15 @@ struct ostr_default {
 
 struct ostr_custom {
     1: i32 bar,
-} ( cpp.customostream )
+} (cpp.customostream)
 
 service foo_service {
-    void foo() ( foo = "bar" ),
-} ( a.b = "c" )
+    void foo() (foo = "bar"),
+} (a.b = "c")
 
 service deprecate_everything {
     // void Foo( ) ( deprecated = "This method has neither 'x' nor \"y\"" )
-    void Bar() ( deprecated = "Fails to deliver ä¸­æ–‡ ÐºÐ¾Ð»Ð±Ð°ÑÐ°" ),
-    void Baz() ( deprecated = "Need this to work with tabs (\t) or Umlauts (Ã¤Ã¶Ã¼Ã„Ã–ÃœÃŸ) too" ),
-    void Deprecated() ( deprecated ),                                                               // no comment
+    void Bar() (deprecated = "Fails to deliver ä¸­æ–‡ ÐºÐ¾Ð»Ð±Ð°ÑÐ°"),
+    void Baz() (deprecated = "Need this to work with tabs (\t) or Umlauts (Ã¤Ã¶Ã¼Ã„Ã–ÃœÃŸ) too"),
+    void Deprecated() (deprecated),                                                               // no comment
 }

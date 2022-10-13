@@ -1,216 +1,442 @@
 // Vitest Snapshot v1
 
 exports[`Thrift Parser > view token 1`] = `
-"[line=1] [type=9] [channel=0] [tokenIndex=0] [startIndex=0] [stopIndex=6]
-typedef"
+"[line=1] [type=14] [channel=0] [tokenIndex=0] [startIndex=0] [stopIndex=5]
+struct"
 `;
 
 exports[`Thrift Parser > view token 2`] = `
-"[line=1] [type=51] [channel=1] [tokenIndex=1] [startIndex=7] [stopIndex=7]
+"[line=1] [type=51] [channel=1] [tokenIndex=1] [startIndex=6] [stopIndex=6]
  "
 `;
 
 exports[`Thrift Parser > view token 3`] = `
-"[line=1] [type=28] [channel=0] [tokenIndex=2] [startIndex=8] [stopIndex=10]
-map"
+"[line=1] [type=49] [channel=0] [tokenIndex=2] [startIndex=7] [stopIndex=9]
+foo"
 `;
 
 exports[`Thrift Parser > view token 4`] = `
-"[line=1] [type=29] [channel=0] [tokenIndex=3] [startIndex=11] [stopIndex=11]
-<"
+"[line=1] [type=51] [channel=1] [tokenIndex=3] [startIndex=10] [stopIndex=10]
+ "
 `;
 
 exports[`Thrift Parser > view token 5`] = `
-"[line=1] [type=46] [channel=0] [tokenIndex=4] [startIndex=12] [stopIndex=17]
-string"
+"[line=1] [type=11] [channel=0] [tokenIndex=4] [startIndex=11] [stopIndex=11]
+{"
 `;
 
 exports[`Thrift Parser > view token 6`] = `
-"[line=1] [type=50] [channel=0] [tokenIndex=5] [startIndex=18] [stopIndex=18]
-,"
+"[line=1] [type=51] [channel=1] [tokenIndex=5] [startIndex=12] [stopIndex=16]
+
+    "
 `;
 
 exports[`Thrift Parser > view token 7`] = `
-"[line=1] [type=49] [channel=0] [tokenIndex=6] [startIndex=19] [stopIndex=22]
-Bonk"
+"[line=2] [type=37] [channel=0] [tokenIndex=6] [startIndex=17] [stopIndex=17]
+1"
 `;
 
 exports[`Thrift Parser > view token 8`] = `
-"[line=1] [type=30] [channel=0] [tokenIndex=7] [startIndex=23] [stopIndex=23]
->"
+"[line=2] [type=19] [channel=0] [tokenIndex=7] [startIndex=18] [stopIndex=18]
+:"
 `;
 
 exports[`Thrift Parser > view token 9`] = `
-"[line=1] [type=51] [channel=1] [tokenIndex=8] [startIndex=24] [stopIndex=24]
+"[line=2] [type=51] [channel=1] [tokenIndex=8] [startIndex=19] [stopIndex=19]
  "
 `;
 
 exports[`Thrift Parser > view token 10`] = `
-"[line=1] [type=49] [channel=0] [tokenIndex=9] [startIndex=25] [stopIndex=31]
-MapType"
+"[line=2] [type=43] [channel=0] [tokenIndex=9] [startIndex=20] [stopIndex=22]
+i32"
 `;
 
 exports[`Thrift Parser > view token 11`] = `
-"[line=1] [type=51] [channel=1] [tokenIndex=10] [startIndex=32] [stopIndex=33]
-
-
-"
+"[line=2] [type=51] [channel=1] [tokenIndex=10] [startIndex=23] [stopIndex=23]
+ "
 `;
 
 exports[`Thrift Parser > view token 12`] = `
-"[line=3] [type=14] [channel=0] [tokenIndex=11] [startIndex=34] [stopIndex=39]
-struct"
+"[line=2] [type=49] [channel=0] [tokenIndex=11] [startIndex=24] [stopIndex=26]
+bar"
 `;
 
 exports[`Thrift Parser > view token 13`] = `
-"[line=3] [type=51] [channel=1] [tokenIndex=12] [startIndex=40] [stopIndex=40]
+"[line=2] [type=51] [channel=1] [tokenIndex=12] [startIndex=27] [stopIndex=27]
  "
 `;
 
 exports[`Thrift Parser > view token 14`] = `
-"[line=3] [type=49] [channel=0] [tokenIndex=13] [startIndex=41] [stopIndex=62]
-OptionalSetDefaultTest"
+"[line=2] [type=22] [channel=0] [tokenIndex=13] [startIndex=28] [stopIndex=28]
+("
 `;
 
 exports[`Thrift Parser > view token 15`] = `
-"[line=3] [type=51] [channel=1] [tokenIndex=14] [startIndex=63] [stopIndex=63]
- "
+"[line=2] [type=49] [channel=0] [tokenIndex=14] [startIndex=29] [stopIndex=36]
+presence"
 `;
 
 exports[`Thrift Parser > view token 16`] = `
-"[line=3] [type=11] [channel=0] [tokenIndex=15] [startIndex=64] [stopIndex=64]
-{"
+"[line=2] [type=51] [channel=1] [tokenIndex=15] [startIndex=37] [stopIndex=37]
+ "
 `;
 
 exports[`Thrift Parser > view token 17`] = `
-"[line=3] [type=51] [channel=1] [tokenIndex=16] [startIndex=65] [stopIndex=67]
-
-  "
+"[line=2] [type=8] [channel=0] [tokenIndex=16] [startIndex=38] [stopIndex=38]
+="
 `;
 
 exports[`Thrift Parser > view token 18`] = `
-"[line=4] [type=37] [channel=0] [tokenIndex=17] [startIndex=68] [stopIndex=68]
-1"
+"[line=2] [type=51] [channel=1] [tokenIndex=17] [startIndex=39] [stopIndex=39]
+ "
 `;
 
 exports[`Thrift Parser > view token 19`] = `
-"[line=4] [type=19] [channel=0] [tokenIndex=18] [startIndex=69] [stopIndex=69]
-:"
+"[line=2] [type=48] [channel=0] [tokenIndex=18] [startIndex=40] [stopIndex=49]
+\\"required\\""
 `;
 
 exports[`Thrift Parser > view token 20`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=19] [startIndex=70] [stopIndex=70]
- "
+"[line=2] [type=23] [channel=0] [tokenIndex=19] [startIndex=50] [stopIndex=50]
+)"
 `;
 
 exports[`Thrift Parser > view token 21`] = `
-"[line=4] [type=21] [channel=0] [tokenIndex=20] [startIndex=71] [stopIndex=78]
-optional"
+"[line=2] [type=50] [channel=0] [tokenIndex=20] [startIndex=51] [stopIndex=51]
+,"
 `;
 
 exports[`Thrift Parser > view token 22`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=21] [startIndex=79] [stopIndex=79]
- "
+"[line=2] [type=51] [channel=1] [tokenIndex=21] [startIndex=52] [stopIndex=56]
+
+    "
 `;
 
 exports[`Thrift Parser > view token 23`] = `
-"[line=4] [type=31] [channel=0] [tokenIndex=22] [startIndex=80] [stopIndex=82]
-set"
+"[line=3] [type=37] [channel=0] [tokenIndex=22] [startIndex=57] [stopIndex=57]
+2"
 `;
 
 exports[`Thrift Parser > view token 24`] = `
-"[line=4] [type=29] [channel=0] [tokenIndex=23] [startIndex=83] [stopIndex=83]
-<"
+"[line=3] [type=19] [channel=0] [tokenIndex=23] [startIndex=58] [stopIndex=58]
+:"
 `;
 
 exports[`Thrift Parser > view token 25`] = `
-"[line=4] [type=46] [channel=0] [tokenIndex=24] [startIndex=84] [stopIndex=89]
-string"
+"[line=3] [type=51] [channel=1] [tokenIndex=24] [startIndex=59] [stopIndex=59]
+ "
 `;
 
 exports[`Thrift Parser > view token 26`] = `
-"[line=4] [type=30] [channel=0] [tokenIndex=25] [startIndex=90] [stopIndex=90]
->"
+"[line=3] [type=43] [channel=0] [tokenIndex=25] [startIndex=60] [stopIndex=62]
+i32"
 `;
 
 exports[`Thrift Parser > view token 27`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=26] [startIndex=91] [stopIndex=91]
+"[line=3] [type=51] [channel=1] [tokenIndex=26] [startIndex=63] [stopIndex=63]
  "
 `;
 
 exports[`Thrift Parser > view token 28`] = `
-"[line=4] [type=49] [channel=0] [tokenIndex=27] [startIndex=92] [stopIndex=103]
-with_default"
+"[line=3] [type=49] [channel=0] [tokenIndex=27] [startIndex=64] [stopIndex=66]
+baz"
 `;
 
 exports[`Thrift Parser > view token 29`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=28] [startIndex=104] [stopIndex=104]
+"[line=3] [type=51] [channel=1] [tokenIndex=28] [startIndex=67] [stopIndex=67]
  "
 `;
 
 exports[`Thrift Parser > view token 30`] = `
-"[line=4] [type=8] [channel=0] [tokenIndex=29] [startIndex=105] [stopIndex=105]
-="
+"[line=3] [type=22] [channel=0] [tokenIndex=29] [startIndex=68] [stopIndex=68]
+("
 `;
 
 exports[`Thrift Parser > view token 31`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=30] [startIndex=106] [stopIndex=106]
- "
+"[line=3] [type=49] [channel=0] [tokenIndex=30] [startIndex=69] [stopIndex=76]
+presence"
 `;
 
 exports[`Thrift Parser > view token 32`] = `
-"[line=4] [type=34] [channel=0] [tokenIndex=31] [startIndex=107] [stopIndex=107]
-["
+"[line=3] [type=51] [channel=1] [tokenIndex=31] [startIndex=77] [stopIndex=77]
+ "
 `;
 
 exports[`Thrift Parser > view token 33`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=32] [startIndex=108] [stopIndex=108]
- "
+"[line=3] [type=8] [channel=0] [tokenIndex=32] [startIndex=78] [stopIndex=78]
+="
 `;
 
 exports[`Thrift Parser > view token 34`] = `
-"[line=4] [type=48] [channel=0] [tokenIndex=33] [startIndex=109] [stopIndex=114]
-\\"test\\""
-`;
-
-exports[`Thrift Parser > view token 35`] = `
-"[line=4] [type=50] [channel=0] [tokenIndex=34] [startIndex=115] [stopIndex=115]
-,"
-`;
-
-exports[`Thrift Parser > view token 36`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=35] [startIndex=116] [stopIndex=116]
+"[line=3] [type=51] [channel=1] [tokenIndex=33] [startIndex=79] [stopIndex=79]
  "
 `;
 
+exports[`Thrift Parser > view token 35`] = `
+"[line=3] [type=48] [channel=0] [tokenIndex=34] [startIndex=80] [stopIndex=87]
+\\"manual\\""
+`;
+
+exports[`Thrift Parser > view token 36`] = `
+"[line=3] [type=50] [channel=0] [tokenIndex=35] [startIndex=88] [stopIndex=88]
+,"
+`;
+
 exports[`Thrift Parser > view token 37`] = `
-"[line=4] [type=48] [channel=0] [tokenIndex=36] [startIndex=117] [stopIndex=123]
-\\"testb\\""
+"[line=3] [type=49] [channel=0] [tokenIndex=36] [startIndex=89] [stopIndex=103]
+cpp.use_pointer"
 `;
 
 exports[`Thrift Parser > view token 38`] = `
-"[line=4] [type=35] [channel=0] [tokenIndex=37] [startIndex=124] [stopIndex=124]
-]"
+"[line=3] [type=51] [channel=1] [tokenIndex=37] [startIndex=104] [stopIndex=104]
+ "
 `;
 
 exports[`Thrift Parser > view token 39`] = `
-"[line=4] [type=51] [channel=1] [tokenIndex=38] [startIndex=125] [stopIndex=125]
-
-"
+"[line=3] [type=8] [channel=0] [tokenIndex=38] [startIndex=105] [stopIndex=105]
+="
 `;
 
 exports[`Thrift Parser > view token 40`] = `
-"[line=5] [type=12] [channel=0] [tokenIndex=39] [startIndex=126] [stopIndex=126]
-}"
+"[line=3] [type=51] [channel=1] [tokenIndex=39] [startIndex=106] [stopIndex=106]
+ "
 `;
 
 exports[`Thrift Parser > view token 41`] = `
-"[line=5] [type=51] [channel=1] [tokenIndex=40] [startIndex=127] [stopIndex=127]
+"[line=3] [type=48] [channel=0] [tokenIndex=40] [startIndex=107] [stopIndex=108]
+\\"\\""
+`;
+
+exports[`Thrift Parser > view token 42`] = `
+"[line=3] [type=50] [channel=0] [tokenIndex=41] [startIndex=109] [stopIndex=109]
+,"
+`;
+
+exports[`Thrift Parser > view token 43`] = `
+"[line=3] [type=23] [channel=0] [tokenIndex=42] [startIndex=110] [stopIndex=110]
+)"
+`;
+
+exports[`Thrift Parser > view token 44`] = `
+"[line=3] [type=50] [channel=0] [tokenIndex=43] [startIndex=111] [stopIndex=111]
+,"
+`;
+
+exports[`Thrift Parser > view token 45`] = `
+"[line=3] [type=51] [channel=1] [tokenIndex=44] [startIndex=112] [stopIndex=116]
+
+    "
+`;
+
+exports[`Thrift Parser > view token 46`] = `
+"[line=4] [type=37] [channel=0] [tokenIndex=45] [startIndex=117] [stopIndex=117]
+3"
+`;
+
+exports[`Thrift Parser > view token 47`] = `
+"[line=4] [type=19] [channel=0] [tokenIndex=46] [startIndex=118] [stopIndex=118]
+:"
+`;
+
+exports[`Thrift Parser > view token 48`] = `
+"[line=4] [type=51] [channel=1] [tokenIndex=47] [startIndex=119] [stopIndex=119]
+ "
+`;
+
+exports[`Thrift Parser > view token 49`] = `
+"[line=4] [type=43] [channel=0] [tokenIndex=48] [startIndex=120] [stopIndex=122]
+i32"
+`;
+
+exports[`Thrift Parser > view token 50`] = `
+"[line=4] [type=51] [channel=1] [tokenIndex=49] [startIndex=123] [stopIndex=123]
+ "
+`;
+
+exports[`Thrift Parser > view token 51`] = `
+"[line=4] [type=49] [channel=0] [tokenIndex=50] [startIndex=124] [stopIndex=126]
+qux"
+`;
+
+exports[`Thrift Parser > view token 52`] = `
+"[line=4] [type=50] [channel=0] [tokenIndex=51] [startIndex=127] [stopIndex=127]
+,"
+`;
+
+exports[`Thrift Parser > view token 53`] = `
+"[line=4] [type=51] [channel=1] [tokenIndex=52] [startIndex=128] [stopIndex=132]
+
+    "
+`;
+
+exports[`Thrift Parser > view token 54`] = `
+"[line=5] [type=37] [channel=0] [tokenIndex=53] [startIndex=133] [stopIndex=133]
+4"
+`;
+
+exports[`Thrift Parser > view token 55`] = `
+"[line=5] [type=19] [channel=0] [tokenIndex=54] [startIndex=134] [stopIndex=134]
+:"
+`;
+
+exports[`Thrift Parser > view token 56`] = `
+"[line=5] [type=51] [channel=1] [tokenIndex=55] [startIndex=135] [stopIndex=135]
+ "
+`;
+
+exports[`Thrift Parser > view token 57`] = `
+"[line=5] [type=43] [channel=0] [tokenIndex=56] [startIndex=136] [stopIndex=138]
+i32"
+`;
+
+exports[`Thrift Parser > view token 58`] = `
+"[line=5] [type=51] [channel=1] [tokenIndex=57] [startIndex=139] [stopIndex=139]
+ "
+`;
+
+exports[`Thrift Parser > view token 59`] = `
+"[line=5] [type=49] [channel=0] [tokenIndex=58] [startIndex=140] [stopIndex=142]
+bop"
+`;
+
+exports[`Thrift Parser > view token 60`] = `
+"[line=5] [type=50] [channel=0] [tokenIndex=59] [startIndex=143] [stopIndex=143]
+,"
+`;
+
+exports[`Thrift Parser > view token 61`] = `
+"[line=5] [type=51] [channel=1] [tokenIndex=60] [startIndex=144] [stopIndex=144]
 
 "
 `;
 
-exports[`Thrift Parser > view token 42`] = `
-"[line=6] [type=-1] [channel=0] [tokenIndex=41] [startIndex=128] [stopIndex=127]
+exports[`Thrift Parser > view token 62`] = `
+"[line=6] [type=12] [channel=0] [tokenIndex=61] [startIndex=145] [stopIndex=145]
+}"
+`;
+
+exports[`Thrift Parser > view token 63`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=62] [startIndex=146] [stopIndex=146]
+ "
+`;
+
+exports[`Thrift Parser > view token 64`] = `
+"[line=6] [type=22] [channel=0] [tokenIndex=63] [startIndex=147] [stopIndex=147]
+("
+`;
+
+exports[`Thrift Parser > view token 65`] = `
+"[line=6] [type=49] [channel=0] [tokenIndex=64] [startIndex=148] [stopIndex=155]
+cpp.type"
+`;
+
+exports[`Thrift Parser > view token 66`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=65] [startIndex=156] [stopIndex=156]
+ "
+`;
+
+exports[`Thrift Parser > view token 67`] = `
+"[line=6] [type=8] [channel=0] [tokenIndex=66] [startIndex=157] [stopIndex=157]
+="
+`;
+
+exports[`Thrift Parser > view token 68`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=67] [startIndex=158] [stopIndex=158]
+ "
+`;
+
+exports[`Thrift Parser > view token 69`] = `
+"[line=6] [type=48] [channel=0] [tokenIndex=68] [startIndex=159] [stopIndex=168]
+\\"DenseFoo\\""
+`;
+
+exports[`Thrift Parser > view token 70`] = `
+"[line=6] [type=50] [channel=0] [tokenIndex=69] [startIndex=169] [stopIndex=169]
+,"
+`;
+
+exports[`Thrift Parser > view token 71`] = `
+"[line=6] [type=49] [channel=0] [tokenIndex=70] [startIndex=170] [stopIndex=180]
+python.type"
+`;
+
+exports[`Thrift Parser > view token 72`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=71] [startIndex=181] [stopIndex=181]
+ "
+`;
+
+exports[`Thrift Parser > view token 73`] = `
+"[line=6] [type=8] [channel=0] [tokenIndex=72] [startIndex=182] [stopIndex=182]
+="
+`;
+
+exports[`Thrift Parser > view token 74`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=73] [startIndex=183] [stopIndex=183]
+ "
+`;
+
+exports[`Thrift Parser > view token 75`] = `
+"[line=6] [type=48] [channel=0] [tokenIndex=74] [startIndex=184] [stopIndex=193]
+\\"DenseFoo\\""
+`;
+
+exports[`Thrift Parser > view token 76`] = `
+"[line=6] [type=50] [channel=0] [tokenIndex=75] [startIndex=194] [stopIndex=194]
+,"
+`;
+
+exports[`Thrift Parser > view token 77`] = `
+"[line=6] [type=49] [channel=0] [tokenIndex=76] [startIndex=195] [stopIndex=204]
+java.final"
+`;
+
+exports[`Thrift Parser > view token 78`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=77] [startIndex=205] [stopIndex=205]
+ "
+`;
+
+exports[`Thrift Parser > view token 79`] = `
+"[line=6] [type=8] [channel=0] [tokenIndex=78] [startIndex=206] [stopIndex=206]
+="
+`;
+
+exports[`Thrift Parser > view token 80`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=79] [startIndex=207] [stopIndex=207]
+ "
+`;
+
+exports[`Thrift Parser > view token 81`] = `
+"[line=6] [type=48] [channel=0] [tokenIndex=80] [startIndex=208] [stopIndex=209]
+\\"\\""
+`;
+
+exports[`Thrift Parser > view token 82`] = `
+"[line=6] [type=50] [channel=0] [tokenIndex=81] [startIndex=210] [stopIndex=210]
+,"
+`;
+
+exports[`Thrift Parser > view token 83`] = `
+"[line=6] [type=49] [channel=0] [tokenIndex=82] [startIndex=211] [stopIndex=234]
+annotation.without.value"
+`;
+
+exports[`Thrift Parser > view token 84`] = `
+"[line=6] [type=50] [channel=0] [tokenIndex=83] [startIndex=235] [stopIndex=235]
+,"
+`;
+
+exports[`Thrift Parser > view token 85`] = `
+"[line=6] [type=23] [channel=0] [tokenIndex=84] [startIndex=236] [stopIndex=236]
+)"
+`;
+
+exports[`Thrift Parser > view token 86`] = `
+"[line=6] [type=51] [channel=1] [tokenIndex=85] [startIndex=237] [stopIndex=237]
+
+"
+`;
+
+exports[`Thrift Parser > view token 87`] = `
+"[line=7] [type=-1] [channel=0] [tokenIndex=86] [startIndex=238] [stopIndex=237]
 <EOF>"
 `;

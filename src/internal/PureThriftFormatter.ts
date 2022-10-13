@@ -427,7 +427,11 @@ export class PureThriftFormatter {
       n instanceof ThriftParserAll.List_separatorContext,
   );
 
-  Type_annotationsContext: NodeProcessFunc = this.genInlineContext();
+  Type_annotationsContext: NodeProcessFunc = this.genInlineContext(
+    " ",
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    (i, n) => !n.parent!.getChild(i - 1).text.endsWith(","),
+  );
 
   Type_annotationContext: NodeProcessFunc = this.genInlineContext(
     " ",
