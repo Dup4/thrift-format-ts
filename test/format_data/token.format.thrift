@@ -1,6 +1,15 @@
-struct foo {
-    1: i32 bar (presence = "required"),
-    2: i32 baz (presence = "manual", cpp.use_pointer = ""),
-    3: i32 qux,
-    4: i32 bop,
-} (cpp.type = "DenseFoo", python.type = "DenseFoo", java.final = "", annotation.without.value)
+service ApiTag {
+    // Bar Comment
+    void Bar() (api.post = "/Bar", api.data_policy = "ENABLE", api.serializer = "json", api.resp_serializer = "json"),
+    // Baz Comment
+    // Baz Comment
+    // Baz Comment
+    void Baz() (api.post = "/Baz", api.data_policy = "ENABLE", api.serializer = "json", api.resp_serializer = "json"),
+
+    /*
+        Foo Comment
+    */
+    void Foo() (api.post = "/Foo", api.data_policy = "ENABLE", api.serializer = "json", api.resp_serializer = "json"),
+    // Deprecated
+    void Deprecated() (deprecated),
+}
