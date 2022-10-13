@@ -34,9 +34,9 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
   }
 
   protected patch() {
-    this.walkNode(this._document, this.patchFieldReq);
+    // this.walkNode(this._document, this.patchFieldReq);
     this.walkNode(this._document, this.patchFieldListSeparator);
-    this.walkNode(this._document, this.patchRemoveLastListSeparator);
+    // this.walkNode(this._document, this.patchRemoveLastListSeparator);
   }
 
   protected patchFieldReq(n: ParseTree) {
