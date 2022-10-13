@@ -82,13 +82,22 @@ service deprecate_everything {
 `;
 
 exports[`ThriftFormatter > format 2`] = `
+"service ApiTag {
+    void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+    void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"),
+    void Deprecated() (deprecated),                                                                                    // no comment
+}
+"
+`;
+
+exports[`ThriftFormatter > format 3`] = `
 "struct OptionalSetDefaultTest {
     1: optional set<string> with_default = [\\"test\\", \\"testb\\"],
 }
 "
 `;
 
-exports[`ThriftFormatter > format 3`] = `
+exports[`ThriftFormatter > format 4`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -500,7 +509,7 @@ struct OptionalSetDefaultTest {
 "
 `;
 
-exports[`ThriftFormatter > format 4`] = `
+exports[`ThriftFormatter > format 5`] = `
 "namespace cpp idl.c
 
 // a
@@ -517,7 +526,7 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 5`] = `
+exports[`ThriftFormatter > format 6`] = `
 "namespace cpp idl.c
 
 // a
@@ -538,13 +547,13 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 6`] = `
+exports[`ThriftFormatter > format 7`] = `
 "const string default_user = \\"\\\\'default_user\\\\'\\" ;
 const string default_name = '\\"abc\\\\'s\\"' ;
 "
 `;
 
-exports[`ThriftFormatter > format 7`] = `
+exports[`ThriftFormatter > format 8`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -593,12 +602,12 @@ service SharedService {
 "
 `;
 
-exports[`ThriftFormatter > format 8`] = `
+exports[`ThriftFormatter > format 9`] = `
 "include \\"shared.thrift\\"
 "
 `;
 
-exports[`ThriftFormatter > format 9`] = `
+exports[`ThriftFormatter > format 10`] = `
 "struct foo {
     1: i32 bar (presence = \\"required\\"),
     2: i32 baz (presence = \\"manual\\", cpp.use_pointer = \\"\\"),
@@ -608,7 +617,7 @@ exports[`ThriftFormatter > format 9`] = `
 "
 `;
 
-exports[`ThriftFormatter > format 10`] = `
+exports[`ThriftFormatter > format 11`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
