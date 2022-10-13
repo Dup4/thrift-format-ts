@@ -98,7 +98,9 @@ exports[`ThriftFormatter > format 3`] = `
 "
 `;
 
-exports[`ThriftFormatter > format 4`] = `
+exports[`ThriftFormatter > format 4`] = `""`;
+
+exports[`ThriftFormatter > format 5`] = `
 "// ServiceLineComment
 
 service ApiTag {
@@ -120,7 +122,7 @@ service ApiTag {
 "
 `;
 
-exports[`ThriftFormatter > format 5`] = `
+exports[`ThriftFormatter > format 6`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -536,7 +538,7 @@ struct OptionalSetDefaultTest {
 "
 `;
 
-exports[`ThriftFormatter > format 6`] = `
+exports[`ThriftFormatter > format 7`] = `
 "namespace cpp idl.c
 
 // a
@@ -554,7 +556,7 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 7`] = `
+exports[`ThriftFormatter > format 8`] = `
 "namespace cpp idl.c
 
 // a
@@ -576,13 +578,13 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 8`] = `
+exports[`ThriftFormatter > format 9`] = `
 "const string default_user = \\"\\\\'default_user\\\\'\\" ;
 const string default_name = '\\"abc\\\\'s\\"' ;
 "
 `;
 
-exports[`ThriftFormatter > format 9`] = `
+exports[`ThriftFormatter > format 10`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -631,12 +633,12 @@ service SharedService {
 "
 `;
 
-exports[`ThriftFormatter > format 10`] = `
+exports[`ThriftFormatter > format 11`] = `
 "include \\"shared.thrift\\"
 "
 `;
 
-exports[`ThriftFormatter > format 11`] = `
+exports[`ThriftFormatter > format 12`] = `
 "// ServiceLineComment
 
 service ApiTag {
@@ -658,7 +660,7 @@ service ApiTag {
 "
 `;
 
-exports[`ThriftFormatter > format 12`] = `
+exports[`ThriftFormatter > format 13`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
