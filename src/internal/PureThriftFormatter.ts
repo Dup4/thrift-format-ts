@@ -89,12 +89,12 @@ export class PureThriftFormatter {
 
   protected getRepeatChildren(
     nodes: ParseTree[],
-    kind_fn: IsKindFunc,
+    kindFn: IsKindFunc,
   ): [ParseTree[], ParseTree[]] {
     const children = [];
 
     for (const [index, node] of nodes.entries()) {
-      if (!kind_fn(node)) {
+      if (!kindFn(node)) {
         return [children, nodes.slice(index)];
       }
 
@@ -171,14 +171,16 @@ export class PureThriftFormatter {
 
   protected genInlineContext(
     join = " ",
-    tight_fn?: TightFN | undefined,
+    tightFn?: TightFN,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    debugSign?: string,
   ): NodeProcessFunc {
     return function (this: PureThriftFormatter, node: ParseTree) {
       for (let i = 0; i < node.childCount; i++) {
         const child = node.getChild(i);
 
         if (i > 0 && join.length > 0) {
-          if (!tight_fn || !tight_fn(i, child)) {
+          if (!tightFn || !tightFn(i, child)) {
             this.push(join);
           }
         }
@@ -364,7 +366,11 @@ export class PureThriftFormatter {
 
   Const_listContext: NodeProcessFunc = this.genInlineContext(
     " ",
-    (_, n) => n instanceof ThriftParserAll.List_separatorContext,
+    (i, n) =>
+      !(
+        n.parent?.getChild(i - 1) instanceof
+        ThriftParserAll.List_separatorContext
+      ),
   );
 
   Enum_ruleContext: NodeProcessFunc = this.genSubfieldsContext(

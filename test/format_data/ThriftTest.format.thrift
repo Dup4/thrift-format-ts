@@ -404,5 +404,5 @@ struct StructB {
 }
 
 struct OptionalSetDefaultTest {
-    1: optional set<string> with_default = [ "test" ]
+    1: optional set<string> with_default = ["test", "testb", "testc"]
 }

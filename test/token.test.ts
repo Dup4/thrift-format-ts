@@ -5,9 +5,8 @@ import { readFile } from "./common";
 
 describe("Thrift Parser", () => {
   it("view token", () => {
-    const content = readFile("a.thrift");
+    const content = readFile("token.thrift");
     const thriftData = ThriftData.fromString(content);
-
     const tokens = thriftData.tokenStream.getTokens();
 
     for (const token of tokens) {
