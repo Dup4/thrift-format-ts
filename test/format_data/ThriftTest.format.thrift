@@ -51,7 +51,7 @@ enum Numberz {
     THREE,
     FIVE = 5,
     SIX,
-    EIGHT = 8,
+    EIGHT = 8
 }
 
 const Numberz myNumberz = Numberz.ONE ;
@@ -61,73 +61,73 @@ const Numberz myNumberz = Numberz.ONE ;
 typedef i64 UserId
 
 struct Bonk {
-    1: required string message,
-    2: required i32 type,
+    1: string message,
+    2: i32 type
 }
 
 typedef map<string, Bonk> MapType
 
 struct Bools {
-    1: required bool im_true,
-    2: required bool im_false,
+    1: bool im_true,
+    2: bool im_false,
 }
 
 struct Xtruct {
-    1: required string string_thing,
-    4: required i8 byte_thing,
-    9: required i32 i32_thing,
-    11: required i64 i64_thing,
+    1: string string_thing,
+    4: i8 byte_thing,
+    9: i32 i32_thing,
+    11: i64 i64_thing
 }
 
 struct Xtruct2 {
-    1: required i8 byte_thing,       // used to be byte, hence the name
-    2: required Xtruct struct_thing,
-    3: required i32 i32_thing,
+    1: i8 byte_thing,       // used to be byte, hence the name
+    2: Xtruct struct_thing,
+    3: i32 i32_thing
 }
 
 struct Xtruct3 {
-    1: required string string_thing,
-    4: required i32 changed,
-    9: required i32 i32_thing,
-    11: required i64 i64_thing,
+    1: string string_thing,
+    4: i32 changed,
+    9: i32 i32_thing,
+    11: i64 i64_thing
 }
 
 struct Insanity {
-    1: required map<Numberz, UserId> userMap,
-    2: required list<Xtruct> xtructs,
+    1: map<Numberz, UserId> userMap,
+    2: list<Xtruct> xtructs
 } ( python.immutable = "" )
 
 struct CrazyNesting {
-    1: required string string_field,
+    1: string string_field,
     2: optional set<Insanity> set_field,
     // Do not insert line break as test/go/Makefile.am is removing this line with pattern match
     3: required list<map<set<i32>( python.immutable = "" ), map<i32, set<list<map<Insanity, string>( python.immutable = "" )>( python.immutable = "" )>>>> list_field,
-    4: required binary binary_field,
+    4: binary binary_field
 }
 
 union SomeUnion {
-    1: required map<Numberz, UserId> map_thing,
-    2: required string string_thing,
-    3: required i32 i32_thing,
-    4: required Xtruct3 xtruct_thing,
-    5: required Insanity insanity_thing,
+    1: map<Numberz, UserId> map_thing,
+    2: string string_thing,
+    3: i32 i32_thing,
+    4: Xtruct3 xtruct_thing,
+    5: Insanity insanity_thing
 }
 
 exception Xception {
-    1: required i32 errorCode,
-    2: required string message,
+    1: i32 errorCode,
+    2: string message
 }
 
 exception Xception2 {
-    1: required i32 errorCode,
-    2: required Xtruct struct_thing,
+    1: i32 errorCode,
+    2: Xtruct struct_thing
 }
 
 struct EmptyStruct {
 }
 
 struct OneField {
-    1: required EmptyStruct field,
+    1: EmptyStruct field
 }
 
 service ThriftTest {
@@ -288,7 +288,7 @@ service ThriftTest {
    * else if arg == "TException" throw TException
    * else do not throw anything
    */
-    void testException(1: string arg) throws(1: required Xception err1),
+    void testException(1: string arg) throws(1: Xception err1),
 
     /**
    * Print 'testMultiException(%s, %s)' with arg0 as '%s' and arg1 as '%s'
@@ -298,7 +298,7 @@ service ThriftTest {
    * else do not throw anything
    * @return Xtruct - an Xtruct with string_thing = arg1
    */
-    Xtruct testMultiException(1: string arg0, 2: string arg1) throws(1: required Xception err1, 2: required Xception2 err2),
+    Xtruct testMultiException(1: string arg0, 2: string arg1) throws(1: Xception err1, 2: Xception2 err2)
 
     /**
    * Print 'testOneway(%d): Sleeping...' with secondsToSleep as '%d'
@@ -306,7 +306,7 @@ service ThriftTest {
    * Print 'testOneway(%d): done sleeping!' with secondsToSleep as '%d'
    * @param i32 secondsToSleep - the number of seconds to sleep
    */
-    oneway void testOneway(1: i32 secondsToSleep),
+    oneway void testOneway(1: i32 secondsToSleep)
 }
 
 service SecondService {
@@ -316,93 +316,93 @@ service SecondService {
    * @param string thing - the string to print
    * @return string - returns the string 'thing'
    */
-    string secondtestString(1: string thing),
+    string secondtestString(1: string thing)
 }
 
 struct VersioningTestV1 {
-    1: required i32 begin_in_both,
-    3: required string old_string,
-    12: required i32 end_in_both,
+    1: i32 begin_in_both,
+    3: string old_string,
+    12: i32 end_in_both
 }
 
 struct VersioningTestV2 {
-    1: required i32 begin_in_both,
-    2: required i32 newint,
-    3: required i8 newbyte,
-    4: required i16 newshort,
-    5: required i64 newlong,
-    6: required double newdouble,
-    7: required Bonk newstruct,
-    8: required list<i32> newlist,
-    9: required set<i32> newset,
-    10: required map<i32, i32> newmap,
-    11: required string newstring,
-    12: required i32 end_in_both,
+    1: i32 begin_in_both,
+    2: i32 newint,
+    3: i8 newbyte,
+    4: i16 newshort,
+    5: i64 newlong,
+    6: double newdouble
+    7: Bonk newstruct,
+    8: list<i32> newlist,
+    9: set<i32> newset,
+    10: map<i32, i32> newmap,
+    11: string newstring,
+    12: i32 end_in_both
 }
 
 struct ListTypeVersioningV1 {
-    1: required list<i32> myints,
-    2: required string hello,
+    1: list<i32> myints;
+    2: string hello;
 }
 
 struct ListTypeVersioningV2 {
-    1: required list<string> strings,
-    2: required string hello,
+    1: list<string> strings;
+    2: string hello;
 }
 
 struct GuessProtocolStruct {
-    7: required map<string, string> map_field,
+    7: map<string, string> map_field,
 }
 
 struct LargeDeltas {
-    1: required Bools b1,                       // b1
-    10: required Bools b10,                     //  b10
-    100: required Bools b100,                   // b100
-    500: required bool check_true,              // check_false
-    1000: required Bools b1000,                 // b1000
-    1500: required bool check_false,            // check_false
-    2000: required VersioningTestV2 vertwo2000, // vertwo2000
-    2500: required set<string> a_set2500,       // a_set2500
-    3000: required VersioningTestV2 vertwo3000, // vertwo3000
-    4000: required list<i32> big_numbers,       // big_numbers
+    1: Bools b1,                       // b1
+    10: Bools b10,                     //  b10
+    100: Bools b100,                   // b100
+    500: bool check_true,              // check_false
+    1000: Bools b1000,                 // b1000
+    1500: bool check_false,            // check_false
+    2000: VersioningTestV2 vertwo2000, // vertwo2000
+    2500: set<string> a_set2500,       // a_set2500
+    3000: VersioningTestV2 vertwo3000, // vertwo3000
+    4000: list<i32> big_numbers        // big_numbers
 }
 
 struct NestedListsI32x2 {
-    1: required list<list<i32>> integerlist,
+    1: list<list<i32>> integerlist
 }
 
 struct NestedListsI32x3 {
-    1: required list<list<list<i32>>> integerlist,
+    1: list<list<list<i32>>> integerlist
 }
 
 struct NestedMixedx2 {
-    1: required list<set<i32>> int_set_list,                     /* int_set_list */
-    2: required map<i32, set<string>> map_int_strset,            /* map_int_strset */
-    3: required list<map<i32, set<string>>> map_int_strset_list, /* map_int_strset_list */
+    1: list<set<i32>> int_set_list                     /* int_set_list */
+    2: map<i32, set<string>> map_int_strset            /* map_int_strset */
+    3: list<map<i32, set<string>>> map_int_strset_list /* map_int_strset_list */
 }
 
 struct ListBonks {
-    1: required list<Bonk> bonk,
+    1: list<Bonk> bonk
 }
 
 struct NestedListsBonk {
-    1: required list<list<list<Bonk>>> bonk,
+    1: list<list<list<Bonk>>> bonk
 }
 
 struct BoolTest {
-    1: optional bool b = true,
-    2: optional string s = "true",
+    1: optional bool b = true;
+    2: optional string s = "true";
 }
 
 struct StructA {
-    1: required string s,
+    1: required string s;
 }
 
 struct StructB {
-    1: optional StructA aa, /* aa */
-    2: required StructA ab, // ab
+    1: optional StructA aa; /* aa */
+    2: required StructA ab; // ab
 }
 
 struct OptionalSetDefaultTest {
-    1: optional set<string> with_default = [ "test" ],
+    1: optional set<string> with_default = [ "test" ]
 }

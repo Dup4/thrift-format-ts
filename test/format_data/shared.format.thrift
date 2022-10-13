@@ -36,10 +36,10 @@ namespace netstd shared
 namespace py shared
 
 struct SharedStruct {
-    1: required i32 key,
-    2: required string value,
+    1: i32 key
+    2: string value
 }
 
 service SharedService {
-    SharedStruct getStruct(1: i32 key),
+    SharedStruct getStruct(1: i32 key)
 }
