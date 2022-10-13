@@ -275,11 +275,11 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     }
 
     const tokens = this.data.tokenStream.getTokens();
-    const last_token = tokens[this.lastTokenIndexForComment];
+    const lastToken = tokens[this.lastTokenIndexForComment];
     const comments = [];
 
     for (const token of tokens.slice(this.lastTokenIndexForComment + 1)) {
-      if (token.line != last_token.line) {
+      if (token.line != lastToken.line) {
         break;
       }
 
@@ -319,8 +319,6 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     if (this.newlineCount > 0) {
       this.tailComment();
     }
-
-    console.log(`TerminalNode ${node.symbol.text}`);
 
     this.addLineComments(node);
     this.addEmptyLine(node.symbol.line);
