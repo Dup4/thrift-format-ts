@@ -351,7 +351,8 @@ export class PureThriftFormatter {
 
   protected Const_map_entryContext: NodeProcessFunc = this.genInlineContext(
     " ",
-    (_, node) => node instanceof ThriftParserAll.List_separatorContext,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    (i, node) => !this.isToken(node.parent!.getChild(i - 1), ":"),
   );
 
   protected List_separatorContext: NodeProcessFunc = this.genInlineContext(" ");

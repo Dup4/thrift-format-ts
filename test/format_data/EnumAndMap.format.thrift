@@ -5,7 +5,7 @@ enum ErrorEnum {
 }
 
 const map<ErrorEnum, string> ErrorEnumStr = {
-    ErrorEnum.OK : "OK",
-    ErrorEnum.NOT_FOUND : "NOT_FOUND",
-    ErrorEnum.INTERNAL_ERROR : "INTERNAL_ERROR",
+    ErrorEnum.OK: "OK",
+    ErrorEnum.NOT_FOUND: "NOT_FOUND",
+    ErrorEnum.INTERNAL_ERROR: "INTERNAL_ERROR",
 }
