@@ -1,4 +1,4 @@
-import { Constant } from "./constant";
+import { Constant } from "./Constant";
 
 export class Utility {
   public static splitByLine(str: string): string[] {

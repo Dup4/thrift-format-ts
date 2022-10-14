@@ -1,8 +1,9 @@
 import { IOptions } from "../types";
-import { Constant } from "./constant";
-import { Options } from "./options";
+
+import { Constant } from "./Constant";
+import { Options } from "./Options";
 import { PrettyThriftFormatter } from "./PrettyThriftFormatter";
-import { Utility } from "./utility";
+import { Utility } from "./Utility";
 
 export class ThriftFormatter {
   options: Options;

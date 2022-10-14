@@ -8,9 +8,9 @@ import {
 } from "thrift-parser-typescript";
 
 import { PureThriftFormatter } from "./PureThriftFormatter";
-import { Options } from "./options";
-import { Utility } from "./utility";
-import { Constant } from "./constant";
+import { Options } from "./Options";
+import { Utility } from "./Utility";
+import { Constant } from "./Constant";
 
 export class PrettyThriftFormatter extends PureThriftFormatter {
   public content: string;

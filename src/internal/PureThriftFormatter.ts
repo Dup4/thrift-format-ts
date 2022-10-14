@@ -5,8 +5,8 @@ import {
   ThriftParserAll,
 } from "thrift-parser-typescript";
 
-import { Constant } from "./constant";
-import { Options } from "./options";
+import { Constant } from "./Constant";
+import { Options } from "./Options";
 
 type Nodes = ParseTree[];
 type IsKindFunc = (node: ParseTree) => boolean;
