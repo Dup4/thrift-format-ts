@@ -193,7 +193,7 @@ export class PureThriftFormatter {
 
   protected genSubfieldsContext(
     start: number,
-    kind_fn: IsKindFunc,
+    kindFn: IsKindFunc,
   ): NodeProcessFunc {
     return function (this: PureThriftFormatter, node: ParseTree) {
       const children = this.getChildren(node);
@@ -202,7 +202,7 @@ export class PureThriftFormatter {
 
       const [fields, left] = this.getRepeatChildren(
         children.slice(start),
-        kind_fn,
+        kindFn,
       );
 
       this.beforeSubfieldsHook(fields);

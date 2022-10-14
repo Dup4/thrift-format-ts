@@ -101,6 +101,17 @@ exports[`ThriftFormatter > format 3`] = `
 exports[`ThriftFormatter > format 4`] = `""`;
 
 exports[`ThriftFormatter > format 5`] = `
+"enum ErrorEnum {
+    OK = 0,
+    NOT_FOUND = 404,
+    INTERNAL_ERROR = 500,
+}
+
+const map<ErrorEnum, string> ErrorEnumStr = { ErrorEnum.OK : \\"OK\\" , ErrorEnum.NOT_FOUND : \\"NOT_FOUND\\" , ErrorEnum.INTERNAL_ERROR : \\"INTERNAL_ERROR\\" , }
+"
+`;
+
+exports[`ThriftFormatter > format 6`] = `
 "// ServiceLineComment
 
 service ApiTag {
@@ -122,7 +133,7 @@ service ApiTag {
 "
 `;
 
-exports[`ThriftFormatter > format 6`] = `
+exports[`ThriftFormatter > format 7`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -538,7 +549,7 @@ struct OptionalSetDefaultTest {
 "
 `;
 
-exports[`ThriftFormatter > format 7`] = `
+exports[`ThriftFormatter > format 8`] = `
 "namespace cpp idl.c
 
 // a
@@ -556,7 +567,7 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 8`] = `
+exports[`ThriftFormatter > format 9`] = `
 "namespace cpp idl.c
 
 // a
@@ -578,13 +589,13 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 9`] = `
+exports[`ThriftFormatter > format 10`] = `
 "const string default_user = \\"\\\\'default_user\\\\'\\" ;
 const string default_name = '\\"abc\\\\'s\\"' ;
 "
 `;
 
-exports[`ThriftFormatter > format 10`] = `
+exports[`ThriftFormatter > format 11`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -633,12 +644,12 @@ service SharedService {
 "
 `;
 
-exports[`ThriftFormatter > format 11`] = `
+exports[`ThriftFormatter > format 12`] = `
 "include \\"shared.thrift\\"
 "
 `;
 
-exports[`ThriftFormatter > format 12`] = `
+exports[`ThriftFormatter > format 13`] = `
 "// ServiceLineComment
 
 service ApiTag {
@@ -660,7 +671,7 @@ service ApiTag {
 "
 `;
 
-exports[`ThriftFormatter > format 13`] = `
+exports[`ThriftFormatter > format 14`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
