@@ -130,7 +130,7 @@ export class PureThriftFormatter {
   protected afterBlockNodeHook(_: ParseTree) {}
 
   protected blockNodes(nodes: ParseTree[], indent = "") {
-    let last_node: ParseTree | undefined = undefined;
+    let lastNode: ParseTree | undefined = undefined;
 
     // eslint-disable-next-line prefer-const
     for (let [index, node] of nodes.entries()) {
@@ -143,7 +143,7 @@ export class PureThriftFormatter {
 
       if (index > 0) {
         if (
-          last_node?.constructor.name !== node.constructor.name ||
+          lastNode?.constructor.name !== node.constructor.name ||
           this.isNewlineNode(node)
         ) {
           this.newLine(2);
@@ -155,7 +155,7 @@ export class PureThriftFormatter {
       this.indent(indent);
       this.processNode(node);
       this.afterBlockNodeHook(node);
-      last_node = node;
+      lastNode = node;
     }
   }
 
