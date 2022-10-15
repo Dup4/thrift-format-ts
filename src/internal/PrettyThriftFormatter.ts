@@ -305,8 +305,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       }
 
       this.append(" ");
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      this.append(comment.text!.trim());
+      this.append(comment.text?.trim() ?? "");
       this.push("");
 
       this.lastTokenIndexForComment = comment.tokenIndex;
