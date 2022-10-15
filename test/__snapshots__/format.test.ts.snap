@@ -138,6 +138,19 @@ service ApiTag {
 `;
 
 exports[`ThriftFormatter > format 7`] = `
+"// ServiceLineComment
+
+service ApiTag {
+    void Bar() (api.post = \\"/Bar\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"), // Bar Comment
+    void Baz() (api.post = \\"/Baz\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"), // Baz Comment
+    void Foo() (api.post = \\"/Foo\\", api.data_policy = \\"ENABLE\\", api.serializer = \\"json\\", api.resp_serializer = \\"json\\"), // Foo
+
+    void Deprecated() (deprecated),                                                                                    // Deprecated
+}
+"
+`;
+
+exports[`ThriftFormatter > format 8`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -553,7 +566,7 @@ struct OptionalSetDefaultTest {
 "
 `;
 
-exports[`ThriftFormatter > format 8`] = `
+exports[`ThriftFormatter > format 9`] = `
 "namespace cpp idl.c
 
 // a
@@ -571,7 +584,7 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 9`] = `
+exports[`ThriftFormatter > format 10`] = `
 "namespace cpp idl.c
 
 // a
@@ -593,13 +606,13 @@ struct B {
 "
 `;
 
-exports[`ThriftFormatter > format 10`] = `
+exports[`ThriftFormatter > format 11`] = `
 "const string default_user = \\"\\\\'default_user\\\\'\\" ;
 const string default_name = '\\"abc\\\\'s\\"' ;
 "
 `;
 
-exports[`ThriftFormatter > format 11`] = `
+exports[`ThriftFormatter > format 12`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -648,12 +661,12 @@ service SharedService {
 "
 `;
 
-exports[`ThriftFormatter > format 12`] = `
+exports[`ThriftFormatter > format 13`] = `
 "include \\"shared.thrift\\"
 "
 `;
 
-exports[`ThriftFormatter > format 13`] = `
+exports[`ThriftFormatter > format 14`] = `
 "// ServiceLineComment
 
 service ApiTag {
@@ -675,7 +688,7 @@ service ApiTag {
 "
 `;
 
-exports[`ThriftFormatter > format 14`] = `
+exports[`ThriftFormatter > format 15`] = `
 "/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
