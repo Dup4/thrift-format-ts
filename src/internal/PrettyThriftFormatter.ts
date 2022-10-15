@@ -185,7 +185,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected afterBlockNodeHook(_: ParseTree) {
-    this.tailComment();
+    this.addTailComment();
   }
 
   protected addEmptyLine(line: number) {
@@ -265,7 +265,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     this.lastTokenIndexForComment = tokenIndex;
   }
 
-  protected tailComment() {
+  protected addTailComment() {
     if (!this.options.comment) {
       return;
     }
@@ -316,7 +316,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
     const node = <TerminalNode>n;
 
     if (this.newlineCount > 0) {
-      this.tailComment();
+      this.addTailComment();
     }
 
     this.addLineComments(node);
