@@ -5,5 +5,6 @@ service ApiTag {
     void Baz() (api.post = "/Baz", api.data_policy = "ENABLE", api.serializer = "json", api.resp_serializer = "json"), // Baz Comment
     void Foo() (api.post = "/Foo", api.data_policy = "ENABLE", api.serializer = "json", api.resp_serializer = "json"), // Foo
 
-    void Deprecated() (deprecated),                                                                                    // Deprecated
+    void Deprecated() (deprecated), // Deprecated
+    void Deprecated2(),             // ddd
 }

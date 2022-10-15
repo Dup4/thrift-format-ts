@@ -18,7 +18,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
   public data: ThriftData;
   public document: ThriftParserAll.DocumentContext;
 
-  protected fieldPadding = 0;
+  protected fieldPaddingForTailComment: Map<number, number> = new Map();
 
   protected lastTokenIndexForComment = -1;
   protected lastLineForEmptyLine = -1;
@@ -161,26 +161,72 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
   }
 
   protected calcSubfieldsPadding(fields: ParseTree[]) {
-    if (fields.length === 0) {
-      return 0;
-    }
+    const fieldPaddingForTailComment: Map<number, number> = new Map();
+    const lines: Array<number> = [];
 
-    let padding = 0;
     for (const field of fields) {
+      let line = -1;
+
+      for (let i = 0; i < field.childCount; i++) {
+        const child = field.getChild(i);
+
+        if (child instanceof TerminalNode) {
+          line = child.symbol.line;
+          break;
+        }
+      }
+
+      if (line === -1) {
+        continue;
+      }
+
+      lines.push(line);
+
       const fieldOut = new PureThriftFormatter(this.options).formatNode(field);
-      padding = Math.max(padding, fieldOut.length);
+      fieldPaddingForTailComment.set(
+        line,
+        fieldOut.length + this.options.indent,
+      );
     }
 
-    return padding;
+    lines.sort();
+
+    for (const line of lines) {
+      if (fieldPaddingForTailComment.has(line - 1)) {
+        fieldPaddingForTailComment.set(
+          line,
+          Math.max(
+            fieldPaddingForTailComment.get(line - 1) as number,
+            fieldPaddingForTailComment.get(line) as number,
+          ),
+        );
+      }
+    }
+
+    lines.reverse();
+
+    for (const line of lines) {
+      if (fieldPaddingForTailComment.has(line + 1)) {
+        fieldPaddingForTailComment.set(
+          line,
+          Math.max(
+            fieldPaddingForTailComment.get(line + 1) as number,
+            fieldPaddingForTailComment.get(line) as number,
+          ),
+        );
+      }
+    }
+
+    return fieldPaddingForTailComment;
   }
 
   protected beforeSubfieldsHook(fields: ParseTree[]) {
-    this.fieldPadding = this.calcSubfieldsPadding(fields) + this.options.indent;
+    this.fieldPaddingForTailComment = this.calcSubfieldsPadding(fields);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected afterSubfieldsHook(_: ParseTree[]) {
-    this.fieldPadding = 0;
+    this.fieldPaddingForTailComment = new Map();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -294,10 +340,12 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       const comment = comments[0];
 
       // align
-      if (this.fieldPadding > 0) {
+      if (this.fieldPaddingForTailComment.has(comment.line)) {
         const parts = Utility.splitByLine(this.out);
         const curTail = parts[parts.length - 1];
-        const padding = this.fieldPadding - curTail.length;
+        const padding =
+          (this.fieldPaddingForTailComment.get(comment.line) as number) -
+          curTail.length;
 
         if (padding > 0) {
           this.append(" ".repeat(padding));

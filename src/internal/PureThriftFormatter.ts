@@ -120,6 +120,10 @@ export class PureThriftFormatter {
     );
   }
 
+  protected isEmptyLineAfterTrim(line: string): boolean {
+    return line.trim().length === 0;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   protected beforeBlockNodeHook(_: ParseTree) {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
