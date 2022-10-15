@@ -296,8 +296,8 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       // align
       if (this.fieldPadding > 0) {
         const parts = Utility.splitByLine(this.out);
-        const cur_tail = parts[parts.length - 1];
-        const padding = this.fieldPadding - cur_tail.length;
+        const curTail = parts[parts.length - 1];
+        const padding = this.fieldPadding - curTail.length;
 
         if (padding > 0) {
           this.append(" ".repeat(padding));
