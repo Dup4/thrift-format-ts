@@ -180,7 +180,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
         continue;
       }
 
-      lines.push(line);
+      lines.push(line as number);
 
       const fieldOut = new PureThriftFormatter(this.options).formatNode(field);
       fieldPaddingForTailComment.set(
@@ -189,7 +189,7 @@ export class PrettyThriftFormatter extends PureThriftFormatter {
       );
     }
 
-    lines.sort();
+    lines.sort((a, b) => a - b);
 
     for (const line of lines) {
       if (fieldPaddingForTailComment.has(line - 1)) {
